@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="GAMEVAULT - Pakistan's premier gaming hardware, PC parts, and custom battlestations store. Academic Semester Project Group 08.">
+  <title>GAMEVAULT | High-Performance PC Parts & Gaming Gear</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Shared GameVault CSS Architecture -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+  <!-- Dynamic Shared Navbar -->
+  <div id="gv-navbar-container"></div>
+
+  <!-- Hero Section -->
+  <section class="gv-hero">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-7 gv-hero-content">
+          <div class="gv-hero-badge">
+            <i class="bi bi-fire text-warning"></i> Authentic Gaming Gear &bull; Group 08 Project
+          </div>
+          <h1 class="mb-3">
+            FORGE YOUR ULTIMATE <br>
+            <span class="gradient-text-cyan-violet">BATTLESTATION</span>
+          </h1>
+          <p class="fs-5 text-secondary mb-4" style="max-width: 580px;">
+            Pakistan's enthusiast destination for ultra-tier PC components, custom battlestations, and competitive esports gear with verified PKR rates.
+          </p>
+
+          <div class="d-flex flex-wrap gap-3 mb-5">
+            <a href="pc-parts.html" class="gv-btn gv-btn-cyan gv-btn-lg">
+              <i class="bi bi-cart3"></i> Shop PC Parts
+            </a>
+            <a href="pc-builder.html" class="gv-btn gv-btn-violet gv-btn-lg">
+              <i class="bi bi-tools"></i> Build Your PC
+            </a>
+            <a href="flash-deals.html" class="gv-btn gv-btn-outline-cyan gv-btn-lg">
+              <i class="bi bi-lightning-charge"></i> Flash Deals
+            </a>
+          </div>
+
+          <!-- Hero Trust Metrics -->
+          <div class="row g-4 pt-3 border-top border-secondary border-opacity-25">
+            <div class="col-4">
+              <div class="h3 fw-bold text-cyan mb-0">38+</div>
+              <div class="small text-secondary">Verified Parts</div>
+            </div>
+            <div class="col-4">
+              <div class="h3 fw-bold text-violet mb-0">100%</div>
+              <div class="small text-secondary">Genuine Brands</div>
+            </div>
+            <div class="col-4">
+              <div class="h3 fw-bold text-white mb-0">PKR</div>
+              <div class="small text-secondary">Real Market Pricing</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Feature Rig Showcase -->
+        <div class="col-lg-5">
+          <div class="gv-card position-relative p-4 border-cyan" style="box-shadow: 0 0 35px rgba(0, 212, 255, 0.2);">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <span class="gv-badge gv-badge-deal"><i class="bi bi-award-fill"></i> Flagship Showcase</span>
+              <span class="text-cyan small fw-bold">RTX 4090 &bull; Ryzen 7800X3D</span>
+            </div>
+            <div class="text-center p-3 my-2" style="background: #090e18; border-radius: 12px;">
+              <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=500&auto=format&fit=crop&q=80" 
+                   alt="Titan Overlord Rig" 
+                   class="img-fluid rounded" 
+                   style="max-height: 250px; object-fit: contain;"
+                   onerror="handleImgError(this, 'TITAN OVERLORD 4K')">
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-3">
+              <div>
+                <div class="small text-secondary">Featured Pre-Built Rig</div>
+                <h4 class="mb-0 text-white">Titan Overlord 4K</h4>
+              </div>
+              <div class="text-end">
+                <div class="small text-secondary">Starting at</div>
+                <div class="h5 text-cyan mb-0 font-monospace">Rs. 1,195,000</div>
+              </div>
+            </div>
+            <a href="prebuilt-pcs.html" class="gv-btn gv-btn-glass mt-3 w-100">
+              Explore Pre-Built Rigs <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Categories Grid -->
+  <section class="gv-section bg-secondary bg-opacity-10">
+    <div class="container">
+      <div class="gv-section-title-wrap">
+        <span class="gv-section-tag">Explore The Vault</span>
+        <h2>HARDWARE & GEAR CATEGORIES</h2>
+        <p>Curated gaming components tested for peak frame-rates and thermals</p>
+      </div>
+
+      <div class="row g-4">
+        <!-- PC Parts -->
+        <div class="col-6 col-md-4 col-lg-2">
+          <a href="pc-parts.html?category=cpu" class="gv-card text-center p-4 text-decoration-none h-100">
+            <div class="fs-1 text-cyan mb-2"><i class="bi bi-cpu"></i></div>
+            <h5 class="text-white fs-6 mb-1">Processors</h5>
+            <span class="small text-secondary">AM5 & Intel 14th</span>
+          </a>
+        </div>
+        <!-- GPUs -->
+        <div class="col-6 col-md-4 col-lg-2">
+          <a href="pc-parts.html?category=gpu" class="gv-card text-center p-4 text-decoration-none h-100">
+            <div class="fs-1 text-violet mb-2"><i class="bi bi-gpu-card"></i></div>
+            <h5 class="text-white fs-6 mb-1">Graphics</h5>
+            <span class="small text-secondary">RTX 4000 & RX 7000</span>
+          </a>
+        </div>
+        <!-- Motherboards & RAM -->
+        <div class="col-6 col-md-4 col-lg-2">
+          <a href="pc-parts.html?category=motherboard" class="gv-card text-center p-4 text-decoration-none h-100">
+            <div class="fs-1 text-cyan mb-2"><i class="bi bi-motherboard"></i></div>
+            <h5 class="text-white fs-6 mb-1">Boards & RAM</h5>
+            <span class="small text-secondary">DDR5 & PCIe 5.0</span>
+          </a>
+        </div>
+        <!-- Keyboards & Mice -->
+        <div class="col-6 col-md-4 col-lg-2">
+          <a href="gaming-gear.html?sub=mice" class="gv-card text-center p-4 text-decoration-none h-100">
+            <div class="fs-1 text-warning mb-2"><i class="bi bi-mouse"></i></div>
+            <h5 class="text-white fs-6 mb-1">Esports Mice</h5>
+            <span class="small text-secondary">Ultralight & 8KHz</span>
+          </a>
+        </div>
+        <!-- Monitors -->
+        <div class="col-6 col-md-4 col-lg-2">
+          <a href="gaming-gear.html?sub=monitors" class="gv-card text-center p-4 text-decoration-none h-100">
+            <div class="fs-1 text-info mb-2"><i class="bi bi-display"></i></div>
+            <h5 class="text-white fs-6 mb-1">Monitors</h5>
+            <span class="small text-secondary">OLED & 240Hz+</span>
+          </a>
+        </div>
+        <!-- PC Builder Tool -->
+        <div class="col-6 col-md-4 col-lg-2">
+          <a href="pc-builder.html" class="gv-card text-center p-4 text-decoration-none h-100 border-cyan">
+            <div class="fs-1 text-cyan mb-2"><i class="bi bi-tools"></i></div>
+            <h5 class="text-white fs-6 mb-1">PC Builder</h5>
+            <span class="small text-cyan fw-bold">Live Compatibility</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Flash Deals Preview -->
+  <section class="gv-section">
+    <div class="container">
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4 gap-3">
+        <div>
+          <span class="gv-badge gv-badge-deal mb-2">
+            <i class="bi bi-lightning-charge-fill"></i> Limited Time Offer
+          </span>
+          <h2 class="mb-0">HOT FLASH DEALS</h2>
+          <p class="text-secondary mb-0">Save up to 15% on high-demand hardware with verified stock in Pakistan</p>
+        </div>
+
+        <div class="d-flex align-items-center gap-3">
+          <div class="d-flex align-items-center gap-2">
+            <span class="small text-secondary text-uppercase fw-bold">Ends In:</span>
+            <div id="hero-countdown" class="d-flex align-items-center gap-1 font-monospace">
+              <!-- Live Countdown Clock -->
+            </div>
+          </div>
+          <a href="flash-deals.html" class="gv-btn gv-btn-outline-cyan gv-btn-sm">
+            View All Deals <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Flash Deals Dynamic Grid -->
+      <div id="home-flash-deals-grid" class="row g-4">
+        <!-- Rendered by home.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- PC Builder Featurette Banner -->
+  <section class="gv-section py-5 my-3" style="background: linear-gradient(135deg, #10192b 0%, #17112c 100%); border-top: 1px solid rgba(0, 212, 255, 0.2); border-bottom: 1px solid rgba(118, 87, 255, 0.2);">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+          <span class="gv-section-tag">Interactive Hardware Engine</span>
+          <h2 class="mb-3">SMART CUSTOM PC BUILDER</h2>
+          <p class="text-secondary mb-4">
+            Zero guesswork. Our built-in validation engine automatically prevents CPU socket mismatches, verifies DDR5/DDR4 motherboard compatibility, and computes total power supply wattage headroom in real time.
+          </p>
+
+          <div class="row g-3 mb-4">
+            <div class="col-sm-6">
+              <div class="d-flex align-items-center gap-2">
+                <i class="bi bi-check-circle-fill text-cyan fs-5"></i>
+                <span class="text-white">Socket AM5 & LGA1700 Checker</span>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="d-flex align-items-center gap-2">
+                <i class="bi bi-check-circle-fill text-cyan fs-5"></i>
+                <span class="text-white">Live TDP Wattage Sum</span>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="d-flex align-items-center gap-2">
+                <i class="bi bi-check-circle-fill text-violet fs-5"></i>
+                <span class="text-white">Live Total in PKR</span>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="d-flex align-items-center gap-2">
+                <i class="bi bi-check-circle-fill text-violet fs-5"></i>
+                <span class="text-white">One-Click "Add All to Cart"</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex gap-3">
+            <a href="pc-builder.html" class="gv-btn gv-btn-cyan">
+              <i class="bi bi-tools"></i> Launch PC Builder
+            </a>
+            <a href="wattage-calculator.html" class="gv-btn gv-btn-glass">
+              <i class="bi bi-battery-charging"></i> Wattage Calculator
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="gv-card p-4 border-violet">
+            <div class="d-flex justify-content-between align-items-center border-bottom border-secondary pb-3 mb-3">
+              <h5 class="mb-0 text-white"><i class="bi bi-motherboard text-cyan me-2"></i> Sample Builder Slot Matrix</h5>
+              <span class="badge bg-success-subtle text-success border border-success">All Compatible</span>
+            </div>
+            <div class="d-flex flex-column gap-2 small">
+              <div class="d-flex justify-content-between p-2 rounded bg-dark">
+                <span><strong class="text-cyan">CPU:</strong> AMD Ryzen 7 7800X3D (AM5)</span>
+                <span class="text-white">Rs. 135,000</span>
+              </div>
+              <div class="d-flex justify-content-between p-2 rounded bg-dark">
+                <span><strong class="text-cyan">Motherboard:</strong> ASUS ROG Strix B650-A (AM5)</span>
+                <span class="text-white">Rs. 78,000</span>
+              </div>
+              <div class="d-flex justify-content-between p-2 rounded bg-dark">
+                <span><strong class="text-cyan">GPU:</strong> ASUS ROG RTX 4090 OC 24GB</span>
+                <span class="text-white">Rs. 685,000</span>
+              </div>
+              <div class="d-flex justify-content-between p-2 rounded bg-dark">
+                <span><strong class="text-cyan">RAM:</strong> Corsair 32GB DDR5-6000 CL30</span>
+                <span class="text-white">Rs. 36,000</span>
+              </div>
+              <div class="d-flex justify-content-between p-2 rounded bg-dark">
+                <span><strong class="text-cyan">PSU:</strong> Corsair RM850x Shift 850W Gold</span>
+                <span class="text-white">Rs. 49,000</span>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-3 pt-2 border-top border-secondary">
+              <div>
+                <span class="text-secondary small">Estimated Power Draw:</span>
+                <strong class="text-cyan ms-1">620W TDP</strong>
+              </div>
+              <a href="pc-builder.html" class="text-cyan small fw-bold text-decoration-none">Configure Your Rig &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Hardware Showcase with Tabs -->
+  <section class="gv-section">
+    <div class="container">
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4 gap-3">
+        <div>
+          <span class="gv-section-tag">Top-Rated Picks</span>
+          <h2 class="mb-0">FEATURED HARDWARE & GEAR</h2>
+          <p class="text-secondary mb-0">Handpicked components trusted by Pakistani competitive gamers</p>
+        </div>
+
+        <!-- Filter Pills -->
+        <div class="d-flex gap-2">
+          <button class="gv-btn gv-btn-glass gv-btn-sm gv-category-tab active" data-category="all">All Picks</button>
+          <button class="gv-btn gv-btn-glass gv-btn-sm gv-category-tab" data-category="pc-parts">PC Parts</button>
+          <button class="gv-btn gv-btn-glass gv-btn-sm gv-category-tab" data-category="gaming-gear">Gaming Gear</button>
+        </div>
+      </div>
+
+      <!-- Featured Grid -->
+      <div id="featured-products-grid" class="row g-4">
+        <!-- Rendered by home.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Benchmarks & Pre-Builts Double Banner -->
+  <section class="gv-section bg-secondary bg-opacity-10 py-5">
+    <div class="container">
+      <div class="row g-4">
+        <!-- Benchmarks Card -->
+        <div class="col-lg-6">
+          <div class="gv-card h-100 p-4 border-cyan">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+              <div>
+                <span class="gv-badge gv-badge-cyan mb-2">Performance Advisor</span>
+                <h3>GAME BENCHMARK GUIDE</h3>
+              </div>
+              <i class="bi bi-speedometer2 fs-1 text-cyan"></i>
+            </div>
+            <p class="text-secondary">
+              Compare average frame rates across 1080p, 1440p, and 4K for titles like <em>Cyberpunk 2077</em>, <em>Warzone</em>, and <em>Black Myth: Wukong</em>.
+            </p>
+            <div class="p-3 bg-dark rounded mb-3">
+              <div class="d-flex justify-content-between small text-secondary mb-1">
+                <span>Cyberpunk 2077 (1440p Ultra)</span>
+                <span class="text-cyan fw-bold">135 FPS</span>
+              </div>
+              <div class="progress" style="height: 8px; background-color: #151e2e;">
+                <div class="progress-bar bg-info" style="width: 85%;"></div>
+              </div>
+            </div>
+            <a href="benchmarks.html" class="gv-btn gv-btn-outline-cyan mt-auto">
+              Open Benchmark Guide <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Pre-Builts Card -->
+        <div class="col-lg-6">
+          <div class="gv-card h-100 p-4 border-violet">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+              <div>
+                <span class="gv-badge gv-badge-sale mb-2">Turnkey Systems</span>
+                <h3>PRE-CONFIGURED RIGS</h3>
+              </div>
+              <i class="bi bi-pc-display fs-1 text-violet"></i>
+            </div>
+            <p class="text-secondary">
+              Don't want to build from scratch? Choose battle-tested, stress-tested pre-built gaming PCs backed by full hardware stability tests.
+            </p>
+            <div class="d-flex gap-3 mb-3">
+              <div class="p-2 bg-dark rounded flex-grow-1 text-center">
+                <div class="small text-secondary">Esports 1080p</div>
+                <div class="fw-bold text-white">Rs. 245,000</div>
+              </div>
+              <div class="p-2 bg-dark rounded flex-grow-1 text-center">
+                <div class="small text-secondary">1440p Beast</div>
+                <div class="fw-bold text-cyan">Rs. 495,000</div>
+              </div>
+              <div class="p-2 bg-dark rounded flex-grow-1 text-center">
+                <div class="small text-secondary">4K Titan Overlord</div>
+                <div class="fw-bold text-violet">Rs. 1,195,000</div>
+              </div>
+            </div>
+            <a href="prebuilt-pcs.html" class="gv-btn gv-btn-outline-violet mt-auto">
+              View All Pre-Builts <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Pillars & Testimonials -->
+  <section class="gv-section">
+    <div class="container">
+      <div class="gv-section-title-wrap">
+        <span class="gv-section-tag">Why GameVault</span>
+        <h2>ENGINEERED FOR ENTHUSIASTS</h2>
+        <p>Built by Group 08 for authentic university semester evaluation</p>
+      </div>
+
+      <!-- 4 Pillars -->
+      <div class="row g-4 mb-5">
+        <div class="col-sm-6 col-lg-3">
+          <div class="gv-card text-center p-4 h-100">
+            <i class="bi bi-patch-check-fill text-cyan fs-1 mb-3"></i>
+            <h5>100% Authentic</h5>
+            <p class="small text-secondary mb-0">Direct imports and factory-sealed boxes from ASUS, AMD, NVIDIA, Corsair & Razer.</p>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <div class="gv-card text-center p-4 h-100">
+            <i class="bi bi-truck text-violet fs-1 mb-3"></i>
+            <h5>Nationwide Dispatch</h5>
+            <p class="small text-secondary mb-0">Simulated secure insured courier delivery to Karachi, Lahore, Islamabad, and nationwide.</p>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <div class="gv-card text-center p-4 h-100">
+            <i class="bi bi-cpu-fill text-warning fs-1 mb-3"></i>
+            <h5>Stress Tested</h5>
+            <p class="small text-secondary mb-0">Every pre-configured build undergoes 24-hour FurMark and Cinebench thermal stress testing.</p>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <div class="gv-card text-center p-4 h-100">
+            <i class="bi bi-shield-lock-fill text-success fs-1 mb-3"></i>
+            <h5>Transparent PKR</h5>
+            <p class="small text-secondary mb-0">No hidden conversion rates or surprise customs charges. Accurate Pakistani market rates.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonials -->
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="gv-card p-4 h-100">
+            <div class="gv-rating-wrap mb-2">
+              <span class="gv-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span>
+              <span class="text-white fw-bold">5.0</span>
+            </div>
+            <p class="text-secondary small fst-italic">
+              "The PC Builder saved me from buying an incompatible AM4 motherboard with the 7800X3D. The live wattage calculation gave me peace of mind for my 850W PSU."
+            </p>
+            <div class="d-flex align-items-center gap-2 mt-auto pt-2 border-top border-secondary">
+              <i class="bi bi-person-circle fs-4 text-cyan"></i>
+              <div>
+                <div class="text-white fw-bold small">Taimoor K.</div>
+                <div class="text-muted" style="font-size: 0.75rem;">Competitive Valorant Player &bull; Lahore</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="gv-card p-4 h-100">
+            <div class="gv-rating-wrap mb-2">
+              <span class="gv-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span>
+              <span class="text-white fw-bold">5.0</span>
+            </div>
+            <p class="text-secondary small fst-italic">
+              "GameVault's UI is unmatched compared to generic computer websites in Pakistan. Clear PKR prices, dark cyberpunk design, and instant order tracking simulation."
+            </p>
+            <div class="d-flex align-items-center gap-2 mt-auto pt-2 border-top border-secondary">
+              <i class="bi bi-person-circle fs-4 text-violet"></i>
+              <div>
+                <div class="text-white fw-bold small">Daniyal R.</div>
+                <div class="text-muted" style="font-size: 0.75rem;">Software Engineer & Creator &bull; Islamabad</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="gv-card p-4 h-100">
+            <div class="gv-rating-wrap mb-2">
+              <span class="gv-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span>
+              <span class="text-white fw-bold">5.0</span>
+            </div>
+            <p class="text-secondary small fst-italic">
+              "Grabbed the Zotac 4070 Super on flash deals. Everything persisted in my cart without needing a backend server thanks to the clean localStorage architecture."
+            </p>
+            <div class="d-flex align-items-center gap-2 mt-auto pt-2 border-top border-secondary">
+              <i class="bi bi-person-circle fs-4 text-warning"></i>
+              <div>
+                <div class="text-white fw-bold small">Hamza S.</div>
+                <div class="text-muted" style="font-size: 0.75rem;">Sim Racer &bull; Karachi</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dynamic Shared Footer -->
+  <div id="gv-footer-container"></div>
+
+  <!-- Bootstrap 5 Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- GameVault Core Data & Scripts -->
+  <script src="js/data/products.js"></script>
+  <script src="js/data/prebuilts-data.js"></script>
+  <script src="js/data/benchmarks-data.js"></script>
+  <script src="js/utils/storage.js"></script>
+  <script src="js/utils/ui.js"></script>
+  <script src="js/components/navbar.js"></script>
+  <script src="js/components/footer.js"></script>
+  <script src="js/pages/home.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,200 @@
+/* ==========================================================================
+   GAMEVAULT - Base Styles, Typography, and Global Resets
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  background-color: var(--gv-bg-main);
+  color: var(--gv-text-primary);
+  font-family: var(--gv-font-body);
+  font-weight: 400;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(circle at 15% 10%, rgba(0, 212, 255, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 85% 85%, rgba(118, 87, 255, 0.06) 0%, transparent 45%);
+  background-attachment: fixed;
+}
+
+/* Custom Gaming Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--gv-bg-secondary);
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+  border: 1px solid var(--gv-border-neon);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gv-cyan);
+}
+
+/* Typography Headings */
+h1, h2, h3, h4, h5, h6, .gv-font-display {
+  font-family: var(--gv-font-display);
+  letter-spacing: 0.05em;
+  color: var(--gv-text-primary);
+  text-transform: uppercase;
+}
+
+h2, h3, h4 {
+  font-family: var(--gv-font-heading);
+  letter-spacing: 0.04em;
+}
+
+h1 {
+  font-size: clamp(2rem, 4vw + 1rem, 3.5rem);
+  font-weight: 900;
+  line-height: 1.15;
+}
+
+h2 {
+  font-size: clamp(1.5rem, 2.5vw + 0.5rem, 2.4rem);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+h3 {
+  font-size: clamp(1.2rem, 1.8vw + 0.3rem, 1.7rem);
+  font-weight: 600;
+}
+
+p {
+  color: var(--gv-text-secondary);
+  margin-bottom: 1rem;
+}
+
+a {
+  color: var(--gv-cyan);
+  text-decoration: none;
+  transition: color var(--gv-transition-fast);
+}
+
+a:hover {
+  color: var(--gv-cyan-hover);
+  text-decoration: none;
+}
+
+/* Neon Text Helpers */
+.text-cyan {
+  color: var(--gv-cyan) !important;
+}
+
+.text-violet {
+  color: var(--gv-violet) !important;
+}
+
+.text-glow-cyan {
+  color: var(--gv-cyan) !important;
+  text-shadow: 0 0 12px var(--gv-cyan-glow);
+}
+
+.text-glow-violet {
+  color: var(--gv-violet) !important;
+  text-shadow: 0 0 12px var(--gv-violet-glow);
+}
+
+.gradient-text-cyan-violet {
+  background: linear-gradient(135deg, var(--gv-cyan) 0%, var(--gv-violet) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* Selection */
+::selection {
+  background: var(--gv-cyan);
+  color: var(--gv-bg-main);
+}
+
+/* Demo Notice Banner */
+.gv-demo-banner {
+  background: linear-gradient(90deg, #131d2e 0%, #1e1333 50%, #131d2e 100%);
+  border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+  color: var(--gv-text-secondary);
+  font-size: 0.82rem;
+  padding: 6px 16px;
+  text-align: center;
+  position: relative;
+  z-index: 1040;
+}
+.gv-demo-banner strong {
+  color: var(--gv-cyan);
+}
+.gv-demo-banner span.badge-proj {
+  background: rgba(118, 87, 255, 0.25);
+  border: 1px solid var(--gv-violet);
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  margin-left: 6px;
+  display: inline-block;
+}
+
+/* Card & Background Utilities */
+.bg-card {
+  background-color: var(--gv-bg-card) !important;
+  color: var(--gv-text-primary);
+}
+.border-cyan {
+  border-color: var(--gv-cyan) !important;
+}
+.border-violet {
+  border-color: var(--gv-violet) !important;
+}
+.modal-content {
+  background-color: var(--gv-bg-card) !important;
+  border: 1px solid var(--gv-border-neon);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(0, 212, 255, 0.2);
+  color: var(--gv-text-primary);
+}
+.modal-header, .modal-footer {
+  border-color: var(--gv-border-subtle) !important;
+}
+
+/* Section Spacing */
+.gv-section {
+  padding: 4.5rem 0;
+  position: relative;
+}
+
+.gv-section-title-wrap {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.gv-section-tag {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--gv-cyan);
+  margin-bottom: 0.5rem;
+  padding: 3px 12px;
+  background: var(--gv-cyan-dim);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  border-radius: 20px;
+}

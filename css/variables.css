@@ -1,0 +1,63 @@
+/* ==========================================================================
+   GAMEVAULT - Custom Design System Variables
+   University Semester Project - Group 08
+   Palette: Background (#090D16), Secondary (#101827), Card (#151F30),
+            Cyan (#00D4FF), Violet (#7657FF), White (#F5F7FA), Text (#9BA8B9)
+   ========================================================================== */
+
+:root {
+  /* Color Tokens */
+  --gv-bg-main: #090D16;
+  --gv-bg-secondary: #101827;
+  --gv-bg-card: #151F30;
+  --gv-bg-card-hover: #1A273D;
+  --gv-bg-input: #0D1422;
+  --gv-bg-glass: rgba(21, 31, 48, 0.75);
+  
+  /* Primary & Accent Neons */
+  --gv-cyan: #00D4FF;
+  --gv-cyan-hover: #38E1FF;
+  --gv-cyan-rgb: 0, 212, 255;
+  --gv-cyan-glow: rgba(0, 212, 255, 0.35);
+  --gv-cyan-dim: rgba(0, 212, 255, 0.12);
+  
+  --gv-violet: #7657FF;
+  --gv-violet-hover: #8F75FF;
+  --gv-violet-rgb: 118, 87, 255;
+  --gv-violet-glow: rgba(118, 87, 255, 0.35);
+  --gv-violet-dim: rgba(118, 87, 255, 0.12);
+
+  /* Functional Status Colors */
+  --gv-success: #10B981;
+  --gv-success-glow: rgba(16, 185, 129, 0.35);
+  --gv-warning: #F59E0B;
+  --gv-warning-glow: rgba(245, 158, 11, 0.35);
+  --gv-danger: #EF4444;
+  --gv-danger-glow: rgba(239, 68, 68, 0.35);
+
+  /* Typography */
+  --gv-text-primary: #F5F7FA;
+  --gv-text-secondary: #9BA8B9;
+  --gv-text-muted: #64748B;
+  --gv-font-display: 'Orbitron', 'Rajdhani', -apple-system, sans-serif;
+  --gv-font-heading: 'Rajdhani', -apple-system, sans-serif;
+  --gv-font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Borders & Shadows */
+  --gv-border-subtle: rgba(255, 255, 255, 0.08);
+  --gv-border-neon: rgba(0, 212, 255, 0.28);
+  --gv-border-violet: rgba(118, 87, 255, 0.3);
+  --gv-card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
+  --gv-glow-cyan-sm: 0 0 15px rgba(0, 212, 255, 0.25);
+  --gv-glow-cyan-lg: 0 0 30px rgba(0, 212, 255, 0.45);
+  --gv-glow-violet-sm: 0 0 15px rgba(118, 87, 255, 0.25);
+
+  /* Radii & Transitions */
+  --gv-radius-sm: 6px;
+  --gv-radius-md: 10px;
+  --gv-radius-lg: 16px;
+  --gv-radius-xl: 24px;
+  --gv-transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --gv-transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --gv-transition-bounce: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
