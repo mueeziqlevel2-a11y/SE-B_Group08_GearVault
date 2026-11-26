@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="GearVault Express Checkout - Complete your PC hardware and gaming gear order with Card or Cash on Delivery.">
+  <title>Checkout | GearVault - High-Performance PC Parts &amp; Gaming Gear</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Shared GearVault / GameVault CSS Architecture -->
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/pages.css">
+
+  <style>
+    .gv-page-hero {
+      padding: 2.5rem 0 1.5rem;
+      border-bottom: 1px solid var(--gv-border-subtle);
+      background: radial-gradient(circle at 80% 20%, rgba(118, 87, 255, 0.09) 0%, transparent 55%);
+    }
+
+    .gv-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--gv-text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .gv-breadcrumb a {
+      color: var(--gv-text-secondary);
+    }
+
+    .gv-breadcrumb a:hover {
+      color: var(--gv-cyan);
+    }
+
+    .gv-checkout-section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-bottom: 1rem;
+      margin-bottom: 1.35rem;
+      border-bottom: 1px solid var(--gv-border-subtle);
+    }
+
+    .gv-step-pill {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gv-cyan) 0%, var(--gv-violet) 100%);
+      color: #050b14;
+      font-family: var(--gv-font-display);
+      font-size: 0.88rem;
+      font-weight: 900;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 12px var(--gv-cyan-glow);
+      flex-shrink: 0;
+    }
+
+    .gv-payment-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .gv-payment-tab {
+      background: var(--gv-bg-input);
+      border: 1px solid var(--gv-border-subtle);
+      border-radius: var(--gv-radius-md);
+      padding: 1rem 1.15rem;
+      color: var(--gv-text-secondary);
+      text-align: left;
+      cursor: pointer;
+      transition: all var(--gv-transition-fast);
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .gv-payment-tab:hover {
+      border-color: var(--gv-border-neon);
+      color: var(--gv-text-primary);
+    }
+
+    .gv-payment-tab.active {
+      background: rgba(0, 212, 255, 0.08);
+      border-color: var(--gv-cyan);
+      color: var(--gv-text-primary);
+      box-shadow: 0 0 16px rgba(0, 212, 255, 0.18);
+    }
+
+    .gv-payment-tab-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--gv-radius-sm);
+      background: rgba(255, 255, 255, 0.04);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      color: var(--gv-cyan);
+      flex-shrink: 0;
+    }
+
+    .gv-input.is-error {
+      border-color: var(--gv-danger) !important;
+      box-shadow: 0 0 12px var(--gv-danger-glow) !important;
+    }
+
+    .gv-input.is-valid-field {
+      border-color: var(--gv-success) !important;
+    }
+
+    .gv-field-error {
+      color: #ff6b6b;
+      font-size: 0.8rem;
+      margin-top: 0.35rem;
+      display: none;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .gv-field-error.visible {
+      display: flex;
+    }
+
+    .gv-cod-notice {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      border-radius: var(--gv-radius-md);
+      padding: 1.15rem 1.25rem;
+    }
+
+    .gv-summary-items-scroll {
+      max-height: 290px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 1.15rem;
+      padding-right: 4px;
+    }
+
+    .gv-summary-mini-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: var(--gv-bg-input);
+      border: 1px solid var(--gv-border-subtle);
+      border-radius: var(--gv-radius-md);
+      padding: 0.6rem 0.75rem;
+    }
+
+    .gv-summary-mini-thumb {
+      width: 48px;
+      height: 48px;
+      background: #090e18;
+      border-radius: var(--gv-radius-sm);
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .gv-summary-mini-thumb img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .gv-summary-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      font-size: 0.94rem;
+      color: var(--gv-text-secondary);
+    }
+
+    .gv-summary-row strong {
+      color: var(--gv-text-primary);
+      font-weight: 600;
+    }
+
+    .gv-summary-total {
+      border-top: 1px solid var(--gv-border-neon);
+      margin-top: 0.75rem;
+      padding-top: 1rem;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+
+    .gv-summary-total-amount {
+      font-family: var(--gv-font-display);
+      font-size: 1.45rem;
+      font-weight: 900;
+      color: var(--gv-cyan);
+      text-shadow: 0 0 14px var(--gv-cyan-glow);
+    }
+
+    .gv-confirm-order-box {
+      background: #0d1523;
+      border: 1px solid var(--gv-border-neon);
+      border-radius: var(--gv-radius-md);
+      padding: 1rem 1.25rem;
+    }
+
+    @media (max-width: 576px) {
+      .gv-payment-tabs {
+        grid-template-columns: 1fr;
+      }
+      .gv-checkout-section-header {
+        flex-wrap: wrap;
+        gap: 0.75rem;
+      }
+      .gv-confirm-order-box > .d-flex {
+        flex-wrap: wrap;
+      }
+      .gv-summary-mini-item {
+        gap: 0.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Dynamic Shared Navbar -->
+  <div id="gv-navbar-container"></div>
+
+  <!-- Checkout Header -->
+  <section class="gv-page-hero">
+    <div class="container">
+      <nav class="gv-breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html"><i class="bi bi-house-door"></i> Home</a>
+        <span>/</span>
+        <a href="cart.html">Shopping Cart</a>
+        <span>/</span>
+        <span class="text-cyan">Checkout</span>
+      </nav>
+
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+        <div>
+          <span class="gv-section-tag mb-2">Simulated Order Pipeline</span>
+          <h1 class="h2 mb-1">
+            EXPRESS <span class="gradient-text-cyan-violet">CHECKOUT</span>
+          </h1>
+          <p class="text-secondary mb-0">
+            Enter your delivery details and choose Card or Cash on Delivery to place your GearVault order.
+          </p>
+        </div>
+
+        <a href="cart.html" class="gv-btn gv-btn-glass gv-btn-sm align-self-start align-self-md-center">
+          <i class="bi bi-arrow-left"></i> Edit Cart
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Checkout Content -->
+  <main class="gv-section py-5 flex-grow-1">
+    <div class="container">
+
+      <!-- Empty Cart Guard -->
+      <div id="gv-checkout-empty" class="gv-empty-state d-none">
+        <div class="gv-empty-icon">
+          <i class="bi bi-bag-x"></i>
+        </div>
+        <h2 class="gv-empty-title text-white">No Items in Your Cart</h2>
+        <p class="text-secondary mx-auto mb-4" style="max-width: 480px;">
+          Your cart is currently empty. Add PC components or gaming gear before proceeding to checkout.
+        </p>
+        <div class="d-flex flex-wrap justify-content-center gap-3">
+          <a href="../pc-parts.html" class="gv-btn gv-btn-cyan gv-btn-lg">
+            <i class="bi bi-cpu"></i> Browse PC Parts
+          </a>
+          <a href="cart.html" class="gv-btn gv-btn-glass gv-btn-lg">
+            <i class="bi bi-cart3"></i> View Cart
+          </a>
+        </div>
+      </div>
+
+      <!-- Active Checkout Form + Summary -->
+      <form id="gv-checkout-form" class="row g-4 align-items-start d-none" novalidate>
+
+        <!-- Left Column: Shipping + Payment -->
+        <div class="col-lg-8 d-flex flex-column gap-4">
+
+          <!-- Section 1: Shipping Details -->
+          <section class="gv-card p-4" aria-labelledby="shipping-heading">
+            <div class="gv-checkout-section-header">
+              <div class="d-flex align-items-center gap-3">
+                <span class="gv-step-pill">1</span>
+                <div>
+                  <h2 id="shipping-heading" class="h4 mb-0 text-white">Shipping Details</h2>
+                  <div class="small text-secondary">Nationwide insured courier delivery across Pakistan</div>
+                </div>
+              </div>
+              <span class="gv-badge gv-badge-cyan">Required</span>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="checkout-name" class="gv-label">Full Name <span class="text-danger">*</span></label>
+                <input type="text" id="checkout-name" class="gv-input" placeholder="e.g. Hamza Siddiqui" autocomplete="name" aria-required="true" aria-invalid="false" aria-describedby="error-checkout-name" required>
+                <div id="error-checkout-name" class="gv-field-error" role="alert"></div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="checkout-email" class="gv-label">Email Address <span class="text-danger">*</span></label>
+                <input type="email" id="checkout-email" class="gv-input" placeholder="e.g. hamza@example.com" autocomplete="email" aria-required="true" aria-invalid="false" aria-describedby="error-checkout-email" required>
+                <div id="error-checkout-email" class="gv-field-error" role="alert"></div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="checkout-phone" class="gv-label">11-Digit Phone Number <span class="text-danger">*</span></label>
+                <input type="tel" id="checkout-phone" class="gv-input" placeholder="03001234567" maxlength="13" autocomplete="tel" aria-required="true" aria-invalid="false" aria-describedby="error-checkout-phone" required>
+                <div id="error-checkout-phone" class="gv-field-error" role="alert"></div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="checkout-city" class="gv-label">City <span class="text-danger">*</span></label>
+                <input type="text" id="checkout-city" class="gv-input" list="gv-pk-cities" placeholder="e.g. Islamabad, Lahore, Karachi" autocomplete="address-level2" aria-required="true" aria-invalid="false" aria-describedby="error-checkout-city" required>
+                <datalist id="gv-pk-cities">
+                  <option value="Islamabad"></option>
+                  <option value="Rawalpindi"></option>
+                  <option value="Lahore"></option>
+                  <option value="Karachi"></option>
+                  <option value="Faisalabad"></option>
+                  <option value="Multan"></option>
+                  <option value="Peshawar"></option>
+                  <option value="Quetta"></option>
+                </datalist>
+                <div id="error-checkout-city" class="gv-field-error" role="alert"></div>
+              </div>
+
+              <div class="col-12">
+                <label for="checkout-address" class="gv-label">Complete Street Address <span class="text-danger">*</span></label>
+                <input type="text" id="checkout-address" class="gv-input" placeholder="House / Flat No., Street, Sector / Phase" autocomplete="street-address" aria-required="true" aria-invalid="false" aria-describedby="error-checkout-address" required>
+                <div id="error-checkout-address" class="gv-field-error" role="alert"></div>
+              </div>
+
+              <div class="col-12">
+                <label for="checkout-notes" class="gv-label">Delivery Notes <span class="text-muted text-lowercase fw-normal">(Optional)</span></label>
+                <textarea id="checkout-notes" class="gv-textarea" rows="2" placeholder="Gate code, preferred call timing, or fragile-handling instructions..."></textarea>
+              </div>
+            </div>
+          </section>
+
+          <!-- Section 2: Payment Method -->
+          <section class="gv-card p-4" aria-labelledby="payment-heading">
+            <div class="gv-checkout-section-header">
+              <div class="d-flex align-items-center gap-3">
+                <span class="gv-step-pill">2</span>
+                <div>
+                  <h2 id="payment-heading" class="h4 mb-0 text-white">Payment Method</h2>
+                  <div class="small text-secondary">Select Credit/Debit Card or Cash on Delivery (Academic Simulation)</div>
+                </div>
+              </div>
+              <span class="gv-badge gv-badge-instock"><i class="bi bi-shield-check"></i> Encrypted</span>
+            </div>
+
+            <!-- Payment Tabs -->
+            <div class="gv-payment-tabs" role="tablist" aria-label="Payment method options">
+              <button
+                type="button"
+                id="tab-payment-card"
+                class="gv-payment-tab active"
+                data-payment="card"
+                role="tab"
+                aria-selected="true"
+                aria-controls="payment-panel-card"
+              >
+                <span class="gv-payment-tab-icon"><i class="bi bi-credit-card-2-front"></i></span>
+                <span>
+                  <strong class="d-block text-white">Credit / Debit Card</strong>
+                  <small class="text-secondary">Visa, Mastercard, 1Link</small>
+                </span>
+              </button>
+
+              <button
+                type="button"
+                id="tab-payment-cod"
+                class="gv-payment-tab"
+                data-payment="cod"
+                role="tab"
+                aria-selected="false"
+                aria-controls="payment-panel-cod"
+              >
+                <span class="gv-payment-tab-icon"><i class="bi bi-cash-coin"></i></span>
+                <span>
+                  <strong class="d-block text-white">Cash on Delivery</strong>
+                  <small class="text-secondary">Pay PKR on arrival</small>
+                </span>
+              </button>
+            </div>
+
+            <!-- Card Payment Panel -->
+            <div id="payment-panel-card" role="tabpanel" aria-labelledby="tab-payment-card">
+              <div class="row g-3">
+                <div class="col-12">
+                  <label for="card-holder" class="gv-label">Cardholder Name <span class="text-danger">*</span></label>
+                  <input type="text" id="card-holder" class="gv-input" placeholder="Name printed on card" autocomplete="cc-name" aria-required="true" aria-invalid="false" aria-describedby="error-card-holder">
+                  <div id="error-card-holder" class="gv-field-error" role="alert"></div>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="card-number" class="gv-label">Card Number (16 Digits) <span class="text-danger">*</span></label>
+                  <input type="text" id="card-number" class="gv-input font-monospace" placeholder="4242 4242 4242 4242" maxlength="19" inputmode="numeric" autocomplete="cc-number" aria-required="true" aria-invalid="false" aria-describedby="error-card-number">
+                  <div id="error-card-number" class="gv-field-error" role="alert"></div>
+                </div>
+
+                <div class="col-6 col-md-3">
+                  <label for="card-expiry" class="gv-label">Expiry (MM/YY) <span class="text-danger">*</span></label>
+                  <input type="text" id="card-expiry" class="gv-input font-monospace" placeholder="09/28" maxlength="5" inputmode="numeric" autocomplete="cc-exp" aria-required="true" aria-invalid="false" aria-describedby="error-card-expiry">
+                  <div id="error-card-expiry" class="gv-field-error" role="alert"></div>
+                </div>
+
+                <div class="col-6 col-md-3">
+                  <label for="card-cvv" class="gv-label">CVV <span class="text-danger">*</span></label>
+                  <input type="password" id="card-cvv" class="gv-input font-monospace" placeholder="123" maxlength="4" inputmode="numeric" autocomplete="cc-csc" aria-required="true" aria-invalid="false" aria-describedby="error-card-cvv">
+                  <div id="error-card-cvv" class="gv-field-error" role="alert"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- COD Payment Panel -->
+            <div id="payment-panel-cod" class="d-none" role="tabpanel" aria-labelledby="tab-payment-cod">
+              <div class="gv-cod-notice">
+                <div class="d-flex align-items-start gap-3">
+                  <i class="bi bi-truck fs-3 text-success"></i>
+                  <div>
+                    <h5 class="text-white mb-1">Cash on Delivery (COD) Selected</h5>
+                    <p class="small text-secondary mb-2">
+                      Pay the total PKR invoice directly to the insured courier agent upon package arrival and seal inspection.
+                    </p>
+                    <span class="gv-badge gv-badge-instock">No Card Details Required</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+        </div>
+
+        <!-- Right Column: Order Summary -->
+        <div class="col-lg-4">
+          <aside class="gv-builder-summary-card" aria-label="Checkout Order Summary">
+            <div class="d-flex align-items-center justify-content-between border-bottom border-secondary border-opacity-25 pb-3 mb-3">
+              <h2 class="h5 mb-0 text-white">
+                <i class="bi bi-bag-check text-cyan me-2"></i> Order Summary
+              </h2>
+              <span id="gv-checkout-item-badge" class="gv-badge gv-badge-cyan">0 Items</span>
+            </div>
+
+            <div id="gv-checkout-items-list" class="gv-summary-items-scroll">
+              <!-- Populated from gearvault_cart -->
+            </div>
+
+            <div class="gv-summary-row">
+              <span>Subtotal</span>
+              <strong id="gv-checkout-subtotal">Rs. 0</strong>
+            </div>
+
+            <div id="gv-checkout-discount-row" class="gv-summary-row d-none">
+              <span class="text-success">
+                <i class="bi bi-tag-fill me-1"></i> Promo (<span id="gv-checkout-promo-code">GEAR10</span>)
+              </span>
+              <strong id="gv-checkout-discount" class="text-success">- Rs. 0</strong>
+            </div>
+
+            <div class="gv-summary-row">
+              <span>Tax (5%)</span>
+              <strong id="gv-checkout-tax">Rs. 0</strong>
+            </div>
+
+            <div class="gv-summary-row">
+              <span>Shipping</span>
+              <strong id="gv-checkout-shipping">Rs. 0</strong>
+            </div>
+
+            <div class="gv-summary-total mb-4">
+              <div>
+                <div class="text-white fw-bold">Total Payable</div>
+                <div class="small text-muted">PKR Final Amount</div>
+              </div>
+              <div id="gv-checkout-total" class="gv-summary-total-amount">Rs. 0</div>
+            </div>
+
+            <button type="submit" id="gv-place-order-btn" class="gv-btn gv-btn-cyan gv-btn-lg w-100 mb-2">
+              <i class="bi bi-check2-circle"></i> Place Order
+            </button>
+
+            <div class="text-center small text-muted mt-2">
+              <i class="bi bi-info-circle text-cyan me-1"></i>
+              Simulated checkout &mdash; no real charges are made.
+            </div>
+          </aside>
+        </div>
+
+      </form>
+    </div>
+  </main>
+
+  <!-- Order Confirmation Modal -->
+  <div class="modal fade" id="gv-order-confirm-modal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content p-2">
+        <div class="modal-header border-bottom border-secondary border-opacity-25">
+          <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-patch-check-fill text-success fs-3"></i>
+            <h5 class="modal-title text-white mb-0" id="confirmModalLabel">Order Confirmed!</h5>
+          </div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+          <p class="text-secondary mb-3">
+            Your GearVault order has been placed and saved to your order history. Use your Order ID below to track live fulfillment stages.
+          </p>
+
+          <div class="gv-confirm-order-box mb-3">
+            <div class="small text-secondary text-uppercase mb-1">Generated Order ID</div>
+            <div class="d-flex align-items-center justify-content-between gap-2">
+              <span id="gv-modal-order-id" class="h4 mb-0 text-cyan font-monospace fw-bold">GV-2026-0000</span>
+              <button type="button" id="gv-copy-order-id-btn" class="gv-btn gv-btn-glass gv-btn-sm">
+                <i class="bi bi-clipboard"></i> Copy
+              </button>
+            </div>
+          </div>
+
+          <div class="d-flex flex-column gap-2 small">
+            <div class="d-flex justify-content-between">
+              <span class="text-secondary">Customer:</span>
+              <strong id="gv-modal-customer" class="text-white">-</strong>
+            </div>
+            <div class="d-flex justify-content-between">
+              <span class="text-secondary">Shipping City:</span>
+              <strong id="gv-modal-city" class="text-white">-</strong>
+            </div>
+            <div class="d-flex justify-content-between">
+              <span class="text-secondary">Payment Method:</span>
+              <strong id="gv-modal-payment" class="text-white">-</strong>
+            </div>
+            <div class="d-flex justify-content-between border-top border-secondary border-opacity-25 pt-2 mt-1">
+              <span class="text-secondary">Total Amount:</span>
+              <strong id="gv-modal-total" class="text-cyan font-monospace fs-6">Rs. 0</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer flex-column flex-sm-row gap-2">
+          <a href="order-tracking.html" id="gv-modal-track-link" class="gv-btn gv-btn-cyan w-100 w-sm-auto flex-grow-1">
+            <i class="bi bi-geo-alt-fill"></i> Track Order
+          </a>
+          <a href="../pc-parts.html" class="gv-btn gv-btn-glass w-100 w-sm-auto">
+            Continue Shopping
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dynamic Shared Footer -->
+  <div id="gv-footer-container"></div>
+
+  <!-- Bootstrap 5 Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- GearVault / GameVault Core Data & Scripts -->
+  <script src="../js/data/products.js"></script>
+  <script src="../js/data/prebuilts-data.js"></script>
+  <script src="../js/utils/storage.js"></script>
+  <script src="../js/utils/ui.js"></script>
+  <script src="../js/components/navbar.js"></script>
+  <script src="../js/components/footer.js"></script>
+  <script src="../js/utils/gearvault-pages.js"></script>
+  <script src="../js/pages/checkout.js"></script>
+
+</body>
+</html>
