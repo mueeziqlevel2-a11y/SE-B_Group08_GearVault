@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="GAMEVAULT Flash Deals - Limited-time discounted PC parts, graphics cards, processors, and competitive gaming gear in PKR.">
+  <title>Flash Deals | GAMEVAULT - Limited-Time Hardware Drops</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Shared GameVault CSS Architecture -->
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/pages.css">
+
+  <!-- Flash Deals Page Scoped Styles -->
+  <style>
+    /* Keyboard Focus Outlines */
+    :is(a, button, input, select, textarea, [tabindex]):focus-visible {
+      outline: 2px solid var(--gv-cyan) !important;
+      outline-offset: 2px !important;
+      box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.25) !important;
+    }
+
+    .gv-flash-hero {
+      background:
+        radial-gradient(circle at 80% 25%, rgba(255, 107, 0, 0.14) 0%, transparent 50%),
+        radial-gradient(circle at 18% 75%, rgba(0, 212, 255, 0.12) 0%, transparent 55%);
+      border-bottom: 1px solid rgba(0, 212, 255, 0.15);
+    }
+
+    .gv-hero-stat-val {
+      font-size: clamp(1.1rem, 3.6vw, 1.75rem);
+      line-height: 1.2;
+      word-break: break-word;
+    }
+
+    /* Countdown Widget */
+    .gv-countdown-card {
+      background: linear-gradient(145deg, rgba(21, 31, 48, 0.95) 0%, rgba(13, 20, 34, 0.98) 100%);
+      border: 1px solid var(--gv-border-neon);
+      border-radius: var(--gv-radius-lg);
+      padding: 1.75rem;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.75), 0 0 30px rgba(0, 212, 255, 0.15);
+    }
+
+    .gv-countdown-grid {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+
+    .gv-countdown-box {
+      flex: 1;
+      min-width: 0;
+      background: #090e18;
+      border: 1px solid rgba(0, 212, 255, 0.28);
+      border-radius: var(--gv-radius-md);
+      padding: 0.9rem 0.5rem;
+      text-align: center;
+      box-shadow: inset 0 0 18px rgba(0, 212, 255, 0.08);
+    }
+
+    .gv-countdown-value {
+      font-family: var(--gv-font-display);
+      font-size: clamp(1.5rem, 4vw, 2.35rem);
+      font-weight: 900;
+      color: var(--gv-cyan);
+      text-shadow: 0 0 14px var(--gv-cyan-glow);
+      line-height: 1;
+      display: block;
+    }
+
+    .gv-countdown-label {
+      font-family: var(--gv-font-heading);
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gv-text-secondary);
+      margin-top: 0.45rem;
+      display: block;
+    }
+
+    .gv-countdown-sep {
+      font-family: var(--gv-font-display);
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--gv-violet);
+      text-shadow: 0 0 10px var(--gv-violet-glow);
+      margin-top: -1rem;
+      flex-shrink: 0;
+    }
+
+    /* Active Category Filter Tab */
+    .gv-category-tab {
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+      flex: 0 1 auto;
+      max-width: 100%;
+    }
+
+    .gv-category-tab.active {
+      background: linear-gradient(135deg, #00D4FF 0%, #0099cc 100%);
+      color: #050b14;
+      border-color: var(--gv-cyan);
+      box-shadow: 0 0 18px rgba(0, 212, 255, 0.4);
+    }
+
+    .gv-category-tab .gv-tab-count {
+      font-size: 0.72rem;
+      padding: 1px 6px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.1);
+      color: inherit;
+    }
+
+    .gv-category-tab.active .gv-tab-count {
+      background: rgba(5, 11, 20, 0.22);
+      color: #050b14;
+    }
+
+    /* Stock Progress Bar */
+    .gv-stock-wrap {
+      background: rgba(9, 13, 22, 0.65);
+      border: 1px solid var(--gv-border-subtle);
+      border-radius: var(--gv-radius-sm);
+      padding: 0.55rem 0.75rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .gv-stock-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.76rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .gv-stock-track {
+      width: 100%;
+      height: 8px;
+      background: #172338;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .gv-stock-fill {
+      height: 100%;
+      border-radius: 999px;
+      transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      background: linear-gradient(90deg, var(--gv-cyan) 0%, var(--gv-violet) 100%);
+      box-shadow: 0 0 10px rgba(0, 212, 255, 0.45);
+    }
+
+    .gv-stock-fill.urgent {
+      background: linear-gradient(90deg, #FF6B00 0%, #EF4444 100%);
+      box-shadow: 0 0 10px rgba(239, 68, 68, 0.55);
+    }
+
+    .gv-stock-fill.medium {
+      background: linear-gradient(90deg, #F59E0B 0%, #FF6B00 100%);
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.45);
+    }
+
+    /* Card Action Buttons */
+    .gv-deal-actions {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.5rem;
+      margin-top: 0.85rem;
+    }
+
+    .gv-btn-wishlist {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--gv-border-subtle);
+      color: var(--gv-text-secondary);
+      padding: 0.48rem 0.8rem;
+      font-size: 0.82rem;
+    }
+
+    .gv-btn-wishlist:hover {
+      border-color: #ff3366;
+      color: #ff668c;
+      background: rgba(255, 51, 102, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .gv-btn-wishlist.wishlist-active {
+      background: rgba(255, 51, 102, 0.16);
+      border-color: #ff3366;
+      color: #ff4d79;
+      box-shadow: 0 0 12px rgba(255, 51, 102, 0.3);
+    }
+
+    .gv-savings-tag {
+      display: inline-block;
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--gv-success);
+      margin-top: 2px;
+    }
+
+    .gv-deals-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem;
+      width: 100%;
+    }
+
+    .gv-deals-search-wrap {
+      position: relative;
+      flex: 1 1 200px;
+      min-width: 0;
+    }
+
+    .gv-deals-search-wrap i {
+      position: absolute;
+      left: 0.85rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gv-text-muted);
+      pointer-events: none;
+    }
+
+    .gv-deals-search-input {
+      padding-left: 2.35rem;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .gv-deals-sort-select {
+      flex: 1 1 180px;
+      min-width: 0;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+
+    @media (min-width: 1200px) {
+      .gv-deals-controls {
+        width: auto;
+        flex-wrap: nowrap;
+      }
+      .gv-deals-search-wrap {
+        width: 220px;
+        flex: 0 0 220px;
+      }
+      .gv-deals-sort-select {
+        width: 195px;
+        flex: 0 0 195px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .gv-flash-hero {
+        padding: 2.5rem 0 !important;
+      }
+      .gv-countdown-card {
+        padding: 1.1rem;
+      }
+      .gv-countdown-grid {
+        gap: 0.4rem;
+      }
+      .gv-countdown-box {
+        padding: 0.65rem 0.25rem;
+      }
+      .gv-countdown-sep {
+        font-size: 1.35rem;
+        margin-top: -0.85rem;
+      }
+      .gv-category-tab {
+        font-size: 0.78rem;
+        padding: 0.4rem 0.7rem;
+        gap: 5px;
+      }
+      .gv-toast-container {
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+      }
+      .gv-toast {
+        min-width: 0;
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .gv-deal-actions {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Dynamic Shared Navbar -->
+  <div id="gv-navbar-container"></div>
+
+  <!-- Flash Deals Hero & Live Countdown -->
+  <section class="gv-hero gv-flash-hero py-5">
+    <div class="container">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-7 gv-hero-content">
+          <div class="gv-hero-badge">
+            <i class="bi bi-lightning-charge-fill text-warning" aria-hidden="true"></i> Limited-Time Vault Drops &bull; Verified PKR Rates
+          </div>
+          <h1 class="mb-3">
+            HOT <span class="gradient-text-cyan-violet">FLASH DEALS</span>
+          </h1>
+          <p class="fs-5 text-secondary mb-4" style="max-width: 600px;">
+            Grab factory-sealed GPUs, 3D V-Cache processors, high-speed DDR5 kits, and tournament-grade peripherals at steep limited-stock discounts before the timer hits zero.
+          </p>
+
+          <!-- Live Deal Metrics -->
+          <div class="row g-2 g-sm-3 pt-3 border-top border-secondary border-opacity-25">
+            <div class="col-4">
+              <div id="deals-total-count" class="gv-hero-stat-val fw-bold text-cyan mb-0">--</div>
+              <div class="small text-secondary">Active Flash Deals</div>
+            </div>
+            <div class="col-4">
+              <div id="deals-max-discount" class="gv-hero-stat-val fw-bold text-warning mb-0">--%</div>
+              <div class="small text-secondary">Max Instant Discount</div>
+            </div>
+            <div class="col-4">
+              <div id="deals-total-savings" class="gv-hero-stat-val fw-bold text-violet mb-0">PKR</div>
+              <div class="small text-secondary">Total Savings Pool</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Countdown Timer Card -->
+        <div class="col-lg-5">
+          <div class="gv-countdown-card">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <span class="gv-badge gv-badge-deal">
+                <i class="bi bi-fire"></i> Round Ends Soon
+              </span>
+              <span class="small text-cyan fw-semibold">
+                <i class="bi bi-clock-history me-1"></i> Live Vault Timer
+              </span>
+            </div>
+
+            <div id="flash-countdown" class="gv-countdown-grid" role="timer" aria-live="polite" aria-label="Flash deals countdown timer">
+              <div class="gv-countdown-box">
+                <span id="cd-hours" class="gv-countdown-value">08</span>
+                <span class="gv-countdown-label">Hours</span>
+              </div>
+              <span class="gv-countdown-sep">:</span>
+              <div class="gv-countdown-box">
+                <span id="cd-minutes" class="gv-countdown-value">45</span>
+                <span class="gv-countdown-label">Minutes</span>
+              </div>
+              <span class="gv-countdown-sep">:</span>
+              <div class="gv-countdown-box">
+                <span id="cd-seconds" class="gv-countdown-value">00</span>
+                <span class="gv-countdown-label">Seconds</span>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top border-secondary border-opacity-25 small text-secondary">
+              <span><i class="bi bi-shield-check text-success me-1"></i> 100% Genuine Stock</span>
+              <span><i class="bi bi-truck text-cyan me-1"></i> Express Dispatch</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filter Bar & Flash Deals Catalog -->
+  <section class="gv-section">
+    <div class="container">
+      <!-- Category Filter Tabs & Sort Bar -->
+      <div class="gv-card p-3 p-md-4 mb-4">
+        <div class="d-flex flex-column flex-xl-row justify-content-between align-items-xl-center gap-3">
+          <!-- Category Filter Tabs -->
+          <div id="flash-category-tabs" class="d-flex flex-wrap gap-2" role="tablist" aria-label="Filter flash deals by category">
+            <button class="gv-btn gv-btn-glass gv-btn-sm gv-category-tab active" data-category="all" type="button">
+              All Deals <span class="gv-tab-count" data-count-for="all">0</span>
+            </button>
+            <button class="gv-btn gv-btn-glass gv-btn-sm gv-category-tab" data-category="pc-parts" type="button">
+              <i class="bi bi-motherboard"></i> PC Parts <span class="gv-tab-count" data-count-for="pc-parts">0</span>
+            </button>
+            <button class="gv-btn gv-btn-glass gv-btn-sm gv-category-tab" data-category="gaming-gear" type="button">
+              <i class="bi bi-controller"></i> Gaming Gear <span class="gv-tab-count" data-count-for="gaming-gear">0</span>
+            </button>
+            <button class="gv-btn gv-btn-glass gv-btn-sm gv-category-tab" data-category="cpu" type="button">
+              <i class="bi bi-cpu"></i> CPUs <span class="gv-tab-count" data-count-for="cpu">0</span>
+            </button>
+            <button class="gv-btn gv-btn-glass gv-btn-sm gv-category-tab" data-category="gpu" type="button">
+              <i class="bi bi-gpu-card"></i> GPUs <span class="gv-tab-count" data-count-for="gpu">0</span>
+            </button>
+            <button class="gv-btn gv-btn-glass gv-btn-sm gv-category-tab" data-category="memory-storage" type="button">
+              <i class="bi bi-memory"></i> Memory &amp; SSDs <span class="gv-tab-count" data-count-for="memory-storage">0</span>
+            </button>
+            <button class="gv-btn gv-btn-glass gv-btn-sm gv-category-tab" data-category="power-cooling" type="button">
+              <i class="bi bi-fan" aria-hidden="true"></i> Cooling, PSU &amp; Cases <span class="gv-tab-count" data-count-for="power-cooling">0</span>
+            </button>
+          </div>
+
+          <!-- Search, Sort & Showing Counter -->
+          <div class="gv-deals-controls flex-shrink-0">
+            <span id="deals-showing-count" class="small text-secondary text-nowrap">Showing 0 deals</span>
+            <div class="gv-deals-search-wrap">
+              <i class="bi bi-search" aria-hidden="true"></i>
+              <input type="search" id="deals-search-input" class="gv-input gv-deals-search-input" placeholder="Filter deals..." aria-label="Filter flash deals by keyword">
+            </div>
+            <select id="deals-sort-select" class="gv-select gv-deals-sort-select" aria-label="Sort flash deals">
+              <option value="featured">Sort: Featured Deals</option>
+              <option value="discount-desc">Highest Discount %</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="stock-asc">Lowest Stock First</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Flash Deals Grid -->
+      <div id="flash-deals-grid" class="row g-4">
+        <!-- Dynamically rendered by js/pages/flash-deals.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Dynamic Shared Footer -->
+  <div id="gv-footer-container"></div>
+
+  <!-- Bootstrap 5 Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- GameVault Core Data & Scripts -->
+  <script src="../js/data/products.js"></script>
+  <script src="../js/utils/storage.js"></script>
+  <script src="../js/utils/ui.js"></script>
+  <script src="../js/components/navbar.js"></script>
+  <script src="../js/components/footer.js"></script>
+  <script src="../js/pages/flash-deals.js"></script>
+
+</body>
+</html>
