@@ -301,7 +301,7 @@
   }
   .gv-tracking-timeline {
     flex-direction: column;
-    gap: 1.8rem;
+    gap: 1.5rem;
     margin: 2rem 0;
   }
   .gv-tracking-timeline::before,
@@ -313,5 +313,88 @@
     width: 100%;
     text-align: left;
     gap: 1rem;
+  }
+  .gv-step-icon {
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+}
+
+/* Accessible Neon Cyan Focus Outlines & Mobile (375px) Stacking Polish */
+.gv-input:focus,
+.gv-input:focus-visible,
+.gv-select:focus,
+.gv-select:focus-visible,
+.gv-textarea:focus,
+.gv-textarea:focus-visible {
+  outline: 2px solid var(--gv-cyan) !important;
+  outline-offset: 2px;
+  border-color: var(--gv-cyan);
+  box-shadow: 0 0 14px var(--gv-cyan-glow);
+}
+
+.gv-input.is-error:focus,
+.gv-input.is-error:focus-visible,
+.gv-select.is-error:focus-visible,
+.gv-textarea.is-error:focus-visible {
+  outline: 2px solid var(--gv-cyan) !important;
+  outline-offset: 2px;
+  border-color: var(--gv-danger) !important;
+  box-shadow: 0 0 14px var(--gv-cyan-glow), 0 0 10px var(--gv-danger-glow) !important;
+}
+
+.gv-btn:focus-visible,
+.gv-action-btn:focus-visible,
+.gv-payment-tab:focus-visible,
+.gv-qty-btn:focus-visible,
+.gv-btn-remove:focus-visible,
+.gv-recent-order-chip:focus-visible {
+  outline: 2px solid var(--gv-cyan) !important;
+  outline-offset: 2px;
+  box-shadow: 0 0 14px var(--gv-cyan-glow);
+}
+
+@media (max-width: 991px) {
+  .gv-builder-summary-card {
+    position: static;
+    top: auto;
+    margin-top: 0.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .gv-navbar {
+    gap: 0.65rem;
+  }
+  .gv-brand-icon {
+    width: 34px;
+    height: 34px;
+    font-size: 1.1rem;
+  }
+  .gv-brand-name {
+    font-size: 1.15rem;
+    letter-spacing: 0.06em;
+  }
+  .gv-brand-sub {
+    font-size: 0.6rem;
+  }
+  .gv-nav-actions {
+    gap: 0.45rem;
+  }
+  .gv-action-btn,
+  .gv-hamburger {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.05rem;
+  }
+  .gv-builder-summary-card {
+    padding: 1.25rem;
+  }
+  .gv-card {
+    padding: 1.15rem;
   }
 }
