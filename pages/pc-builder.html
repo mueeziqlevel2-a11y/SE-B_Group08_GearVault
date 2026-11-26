@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="GearVault Custom PC Builder - Configure your dream battlestation with 6 interactive component slots, real-time socket and wattage compatibility checks, and verified PKR pricing.">
+  <title>Custom PC Builder | GearVault - High-Performance Battlestations</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Shared GearVault / GameVault CSS Architecture -->
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/pages.css">
+
+  <style>
+    /* Accessible High-Contrast Keyboard Focus States */
+    :is(a, button, input, select, textarea, [tabindex], .gv-btn, .gv-action-btn, .gv-preset-chip):focus-visible {
+      outline: 2px solid var(--gv-cyan) !important;
+      outline-offset: 2px !important;
+      box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.35) !important;
+    }
+
+    /* PC Builder Page Specific Styling */
+    .gv-builder-hero {
+      padding: 2.75rem 0 1.75rem;
+      border-bottom: 1px solid var(--gv-border-subtle);
+      background:
+        radial-gradient(circle at 85% 15%, rgba(0, 212, 255, 0.12) 0%, transparent 55%),
+        radial-gradient(circle at 15% 85%, rgba(118, 87, 255, 0.10) 0%, transparent 60%);
+    }
+
+    .gv-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--gv-text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .gv-breadcrumb a {
+      color: var(--gv-text-secondary);
+      text-decoration: none;
+      transition: color var(--gv-transition-fast);
+    }
+
+    .gv-breadcrumb a:hover {
+      color: var(--gv-cyan);
+    }
+
+    /* Slot Enhancements */
+    .gv-builder-slot {
+      background: var(--gv-bg-card);
+      border: 1px solid var(--gv-border-subtle);
+      border-radius: var(--gv-radius-lg);
+      padding: 1.35rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      transition: all var(--gv-transition-normal);
+      position: relative;
+    }
+
+    @media (min-width: 768px) {
+      .gv-builder-slot {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    .gv-builder-slot.is-filled {
+      border-color: rgba(0, 212, 255, 0.22);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .gv-builder-slot.is-filled:hover {
+      border-color: var(--gv-border-neon);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 18px rgba(0, 212, 255, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .gv-builder-slot.is-empty {
+      border-style: dashed;
+      border-color: rgba(255, 255, 255, 0.12);
+      background: rgba(21, 31, 48, 0.45);
+    }
+
+    .gv-slot-thumbnail {
+      width: 72px;
+      height: 72px;
+      background: #0d1522;
+      border: 1px solid var(--gv-border-subtle);
+      border-radius: var(--gv-radius-md);
+      padding: 0.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .gv-slot-thumbnail img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .gv-slot-specs-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .gv-spec-pill {
+      font-size: 0.75rem;
+      padding: 0.2rem 0.55rem;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--gv-radius-sm);
+      color: var(--gv-text-secondary);
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .gv-spec-pill strong {
+      color: #fff;
+      margin-left: 0.25rem;
+    }
+
+    .gv-slot-price {
+      font-family: var(--gv-font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--gv-cyan);
+    }
+
+    .gv-slot-wattage-pill {
+      font-size: 0.75rem;
+      font-weight: 700;
+      font-family: var(--gv-font-display);
+      padding: 0.2rem 0.6rem;
+      background: rgba(0, 212, 255, 0.12);
+      border: 1px solid rgba(0, 212, 255, 0.3);
+      color: var(--gv-cyan);
+      border-radius: 20px;
+    }
+
+    .gv-slot-wattage-pill.bg-violet {
+      background: rgba(118, 87, 255, 0.15);
+      border-color: rgba(118, 87, 255, 0.35);
+      color: var(--gv-violet);
+    }
+
+    .gv-slot-actions {
+      min-width: 250px;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 767px) {
+      .gv-slot-actions {
+        width: 100%;
+        margin-top: 0.5rem;
+      }
+    }
+
+    /* Compatibility Status Cards */
+    .gv-compat-status-card {
+      border-radius: var(--gv-radius-md);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+      transition: all var(--gv-transition-normal);
+    }
+
+    .gv-compat-status-card.gv-compat-ok {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(13, 20, 34, 0.95) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
+    }
+
+    .gv-compat-status-card.gv-compat-error {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(13, 20, 34, 0.95) 100%);
+      border: 1px solid rgba(239, 68, 68, 0.5);
+      box-shadow: 0 0 25px rgba(239, 68, 68, 0.25);
+    }
+
+    .gv-compat-status-card.gv-compat-warning {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.12) 0%, rgba(13, 20, 34, 0.95) 100%);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      box-shadow: 0 0 20px rgba(245, 158, 11, 0.15);
+    }
+
+    .gv-badge-success {
+      background: rgba(16, 185, 129, 0.2);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+
+    .gv-badge-danger {
+      background: rgba(239, 68, 68, 0.2);
+      color: #ef4444;
+      border: 1px solid rgba(239, 68, 68, 0.4);
+    }
+
+    .gv-badge-warning {
+      background: rgba(245, 158, 11, 0.2);
+      color: #f59e0b;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+
+    /* Sub-checks list */
+    .gv-check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+      padding: 0.75rem 0.9rem;
+      border-radius: var(--gv-radius-md);
+      margin-bottom: 0.6rem;
+      background: rgba(9, 13, 22, 0.65);
+      border: 1px solid var(--gv-border-subtle);
+    }
+
+    .gv-check-item.gv-check-pass {
+      border-left: 3px solid var(--gv-success);
+    }
+
+    .gv-check-item.gv-check-fail {
+      border-left: 3px solid var(--gv-danger);
+      background: rgba(239, 68, 68, 0.08);
+      border-color: rgba(239, 68, 68, 0.3);
+    }
+
+    .gv-check-item.gv-check-warn {
+      border-left: 3px solid var(--gv-warning);
+      background: rgba(245, 158, 11, 0.08);
+    }
+
+    .gv-check-item.gv-check-pending {
+      border-left: 3px solid var(--gv-text-muted);
+      opacity: 0.75;
+    }
+
+    /* Wattage Panel in Summary */
+    .gv-summary-wattage-box {
+      background: #090e18;
+      border: 1px solid var(--gv-border-neon);
+      border-radius: var(--gv-radius-md);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .gv-summary-part-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.45rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .gv-summary-part-row:last-child {
+      border-bottom: none;
+    }
+
+    /* Modal picker card */
+    .gv-picker-card {
+      background: var(--gv-bg-input);
+      border: 1px solid var(--gv-border-subtle);
+      border-radius: var(--gv-radius-md);
+      padding: 1rem;
+      height: 100%;
+      transition: all var(--gv-transition-normal);
+    }
+
+    .gv-picker-card:hover {
+      border-color: var(--gv-border-neon);
+      box-shadow: 0 4px 18px rgba(0, 212, 255, 0.15);
+    }
+
+    .gv-picker-card.is-selected {
+      border-color: var(--gv-cyan);
+      background: rgba(0, 212, 255, 0.05);
+    }
+
+    .gv-picker-thumb {
+      width: 64px;
+      height: 64px;
+      background: #090e18;
+      border: 1px solid var(--gv-border-subtle);
+      border-radius: var(--gv-radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.35rem;
+      flex-shrink: 0;
+    }
+
+    .gv-picker-thumb img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .gv-picker-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--gv-text-primary);
+    }
+
+    /* Preset Buttons bar */
+    .gv-preset-chip {
+      background: rgba(21, 31, 48, 0.8);
+      border: 1px solid var(--gv-border-subtle);
+      border-radius: 30px;
+      padding: 0.4rem 1.1rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--gv-text-secondary);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all var(--gv-transition-fast);
+    }
+
+    .gv-preset-chip:hover {
+      border-color: var(--gv-cyan);
+      color: #fff;
+      background: var(--gv-cyan-dim);
+      transform: translateY(-1px);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Dynamic Shared Navbar -->
+  <div id="gv-navbar-container"></div>
+
+  <!-- Hero Header -->
+  <section class="gv-builder-hero">
+    <div class="container">
+      <div class="gv-breadcrumb">
+        <a href="../index.html"><i class="bi bi-house-door"></i> Home</a>
+        <i class="bi bi-chevron-right small"></i>
+        <span class="text-cyan">Custom PC Builder</span>
+      </div>
+
+      <div class="d-flex flex-column flex-lg-row align-items-lg-center justify-content-between gap-3">
+        <div>
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <span class="gv-badge gv-badge-deal"><i class="bi bi-tools"></i> SYSTEM FORGE</span>
+            <span class="text-secondary small">&bull; Group 08 Interactive Architecture</span>
+          </div>
+          <h1 class="text-white mb-2" style="font-family: var(--gv-font-heading); font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800;">
+            FORGE YOUR CUSTOM <span class="gradient-text-cyan-violet">BATTLESTATION</span>
+          </h1>
+          <p class="text-secondary mb-0" style="max-width: 650px;">
+            Select 6 core hardware components. Real-time engine enforces socket parity, RAM DDR generation compatibility, and PSU wattage headroom with verified PKR pricing.
+          </p>
+        </div>
+
+        <!-- Hero Trust Pills -->
+        <div class="d-flex flex-wrap gap-2">
+          <div class="gv-preset-chip">
+            <i class="bi bi-cpu text-cyan"></i> Socket Guard
+          </div>
+          <div class="gv-preset-chip">
+            <i class="bi bi-battery-charging text-violet"></i> Wattage Guard
+          </div>
+          <div class="gv-preset-chip">
+            <i class="bi bi-shield-check text-success"></i> 100% Genuine
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Preset Selection Bar -->
+      <div class="d-flex align-items-center flex-wrap gap-2 pt-3 mt-3 border-top border-secondary border-opacity-25">
+        <span class="small text-muted me-1"><i class="bi bi-lightning-charge-fill text-warning me-1"></i> Quick Presets:</span>
+        <button type="button" class="gv-preset-chip" data-preset="am5_esports">
+          <i class="bi bi-fire text-warning"></i> AM5 Esports 1440p
+        </button>
+        <button type="button" class="gv-preset-chip" data-preset="intel_titan">
+          <i class="bi bi-award-fill text-cyan"></i> Intel 14th Gen 4K Titan
+        </button>
+        <button type="button" class="gv-preset-chip" data-preset="budget_stealth">
+          <i class="bi bi-piggy-bank text-success"></i> Budget 1080p Value
+        </button>
+      </div>
+
+      <!-- Saved notice banner if auto-loaded -->
+      <div id="builder-saved-notice" class="alert alert-info py-2 px-3 mt-3 mb-0 small d-none" style="background: rgba(0, 212, 255, 0.1); border-color: rgba(0, 212, 255, 0.3); color: var(--gv-cyan);">
+        <!-- Loaded saved build message -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Builder Body -->
+  <main class="gv-section py-5">
+    <div class="container">
+      <div class="row g-4">
+
+        <!-- Left Column: 6 Interactive Component Slots -->
+        <div class="col-lg-8">
+          <div class="d-flex align-items-center justify-content-between mb-3 pb-2 border-bottom border-secondary border-opacity-25">
+            <div>
+              <h2 class="text-white fs-4 mb-0" style="font-family: var(--gv-font-heading);">
+                <i class="bi bi-motherboard text-cyan me-2"></i> Core Components
+              </h2>
+              <span class="small text-secondary">6 slots required for a complete bootable configuration</span>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+              <span id="builder-slots-count" class="badge bg-dark border border-secondary text-cyan px-3 py-2">
+                0 / 6 Components
+              </span>
+              <button type="button" id="gv-btn-clear-build" class="gv-btn gv-btn-sm gv-btn-glass text-secondary" title="Reset all component slots">
+                <i class="bi bi-arrow-counterclockwise"></i> Reset
+              </button>
+            </div>
+          </div>
+
+          <!-- Component Slots Container (Rendered by js/pages/pc-builder.js) -->
+          <div id="gv-builder-slots-container" class="gv-builder-slots-grid">
+            <!-- Dynamically populated from js/data/products.js -->
+          </div>
+        </div>
+
+        <!-- Right Column: Sticky Summary & Live Compatibility Guard -->
+        <div class="col-lg-4">
+          <aside class="gv-builder-summary-card">
+
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <h3 class="text-white fs-5 mb-0" style="font-family: var(--gv-font-heading);">
+                <i class="bi bi-shield-lock-fill text-cyan me-2"></i> Build Diagnostics
+              </h3>
+              <span class="badge bg-dark border border-cyan text-cyan">LIVE CHECK</span>
+            </div>
+
+            <!-- Main Compatibility Banner (Green OK vs Red Mismatch) -->
+            <div id="builder-compat-banner">
+              <!-- Dynamically rendered -->
+            </div>
+
+            <!-- Detailed Sub-checks (Socket, RAM, PSU) -->
+            <div id="builder-compat-checks-list" class="mb-3">
+              <!-- Dynamically rendered -->
+            </div>
+
+            <!-- Real-Time Wattage Visualizer -->
+            <div class="gv-summary-wattage-box">
+              <div class="d-flex align-items-center justify-content-between mb-2">
+                <span class="small text-secondary fw-bold text-uppercase">
+                  <i class="bi bi-lightning-charge text-warning me-1"></i> Power Estimation
+                </span>
+                <span id="builder-wattage-pct" class="small text-cyan fw-bold font-monospace">0W Load</span>
+              </div>
+
+              <div class="d-flex align-items-baseline justify-content-between mb-2">
+                <div>
+                  <div id="builder-total-wattage" class="fs-2 fw-bold text-cyan font-monospace lh-1">50W</div>
+                  <div class="small text-muted">Estimated Peak Draw</div>
+                </div>
+                <div class="text-end">
+                  <div class="small text-secondary">PSU Capacity: <strong id="builder-psu-capacity" class="text-white">None</strong></div>
+                  <div class="small text-muted">Recommended: <strong id="builder-rec-wattage" class="text-violet">63W</strong></div>
+                </div>
+              </div>
+
+              <!-- Power Bar Track -->
+              <div class="gv-wattage-bar-track mb-0" style="height: 10px; margin: 0.5rem 0;">
+                <div id="builder-wattage-bar-fill" class="gv-wattage-bar-fill" style="width: 10%;"></div>
+              </div>
+            </div>
+
+            <!-- Real-Time Total Price Calculation -->
+            <div class="p-3 rounded mb-3" style="background: rgba(9, 14, 24, 0.8); border: 1px solid var(--gv-border-subtle);">
+              <div class="d-flex align-items-baseline justify-content-between mb-2">
+                <span class="text-secondary small text-uppercase fw-bold">Total Build Cost</span>
+                <span class="small text-success"><i class="bi bi-patch-check-fill me-1"></i> Verified PKR</span>
+              </div>
+              <div id="builder-total-price" class="fs-3 fw-bold text-white font-monospace mb-2" style="color: var(--gv-cyan) !important;">
+                Rs. 0
+              </div>
+              <div class="small text-muted mb-2">Includes standard 5% GST and manufacturer warranty.</div>
+
+              <!-- Items Breakdown Drawer -->
+              <div class="border-top border-secondary border-opacity-25 pt-2">
+                <div class="small text-secondary fw-bold mb-1">Configured Items:</div>
+                <div id="builder-summary-items-list" class="small">
+                  <!-- Dynamically populated -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Primary Actions (Add to Cart, Save Build, View Cart) -->
+            <div class="d-flex flex-column gap-2">
+              <button type="button" id="gv-btn-add-build-cart" class="gv-btn gv-btn-cyan w-100 py-3">
+                <i class="bi bi-cart-plus-fill"></i> Add Complete Build to Cart
+              </button>
+
+              <button type="button" id="gv-btn-save-build" class="gv-btn gv-btn-violet w-100">
+                <i class="bi bi-bookmark-check-fill"></i> Save Build
+              </button>
+
+              <a href="cart.html" class="gv-btn gv-btn-glass w-100 text-decoration-none">
+                <i class="bi bi-cart3"></i> View Shopping Cart
+              </a>
+            </div>
+
+          </aside>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Component Picker Modal (Search & Brand Filter) -->
+  <div class="modal fade" id="componentPickerModal" tabindex="-1" aria-labelledby="picker-modal-title" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content" style="background: #0d1523; border: 1px solid var(--gv-border-neon); border-radius: var(--gv-radius-lg); box-shadow: 0 15px 50px rgba(0,0,0,0.85);">
+        
+        <div class="modal-header border-secondary border-opacity-25 pb-3">
+          <h5 class="modal-title text-white" id="picker-modal-title" style="font-family: var(--gv-font-heading);">
+            <i class="bi bi-grid-3x3-gap text-cyan me-2"></i> Select Component
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body py-3">
+          <!-- Search & Filter Controls -->
+          <div class="row g-2 mb-3">
+            <div class="col-sm-8">
+              <div class="position-relative">
+                <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-secondary"></i>
+                <input type="search" id="picker-search-input" class="gv-input ps-5 py-2" placeholder="Search by name, spec, or chipset..." aria-label="Search component">
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <select id="picker-brand-filter" class="gv-select py-2" aria-label="Filter by brand">
+                <option value="all">All Brands</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Product Cards Grid -->
+          <div id="picker-products-grid" class="row g-3">
+            <!-- Dynamically populated by js/pages/pc-builder.js -->
+          </div>
+        </div>
+
+        <div class="modal-footer border-secondary border-opacity-25">
+          <button type="button" class="gv-btn gv-btn-glass gv-btn-sm" data-bs-dismiss="modal">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Dynamic Shared Footer -->
+  <div id="gv-footer-container"></div>
+
+  <!-- Bootstrap 5 Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- GearVault / GameVault Core Data & Scripts -->
+  <script src="../js/data/products.js"></script>
+  <script src="../js/data/prebuilts-data.js"></script>
+  <script src="../js/utils/storage.js"></script>
+  <script src="../js/utils/ui.js"></script>
+  <script src="../js/utils/compatibility.js"></script>
+  <script src="../js/components/navbar.js"></script>
+  <script src="../js/components/footer.js"></script>
+  <script src="../js/utils/gearvault-pages.js"></script>
+  <script src="../js/pages/pc-builder.js"></script>
+
+</body>
+</html>
