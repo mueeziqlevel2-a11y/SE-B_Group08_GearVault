@@ -356,9 +356,10 @@
 
 @media (max-width: 991px) {
   .gv-builder-summary-card {
-    position: static;
-    top: auto;
-    margin-top: 0.5rem;
+    position: static !important;
+    top: auto !important;
+    margin-top: 1.5rem !important;
+    width: 100% !important;
   }
 }
 
@@ -392,9 +393,58 @@
     font-size: 1.05rem;
   }
   .gv-builder-summary-card {
-    padding: 1.25rem;
+    padding: 1.15rem 1rem !important;
   }
   .gv-card {
     padding: 1.15rem;
+  }
+  .gv-builder-slot {
+    padding: 1rem !important;
+  }
+  .gv-slot-actions {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+  .gv-rig-specs-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .gv-simulator-panel {
+    padding: 1.15rem 1rem !important;
+  }
+  .gv-res-pills {
+    width: 100% !important;
+  }
+}
+
+/* 375px Mobile Ultra-Compact Polish */
+@media (max-width: 380px) {
+  .gv-builder-hero,
+  .gv-prebuilt-hero,
+  .gv-bench-hero {
+    padding: 1.75rem 0 1.25rem !important;
+  }
+  .gv-slot-thumbnail {
+    width: 54px !important;
+    height: 54px !important;
+  }
+  .gv-slot-product-name {
+    font-size: 0.95rem !important;
+  }
+  .gv-slot-price {
+    font-size: 1rem !important;
+  }
+  .gv-tier-tab {
+    padding: 0.45rem 0.9rem !important;
+    font-size: 0.85rem !important;
+  }
+  .gv-benchmark-card {
+    padding: 1rem !important;
+  }
+  .gv-benchmark-fps-val {
+    font-size: 1.8rem !important;
+  }
+  .gv-btn-lg {
+    padding: 0.75rem 1.4rem !important;
+    font-size: 0.95rem !important;
   }
 }

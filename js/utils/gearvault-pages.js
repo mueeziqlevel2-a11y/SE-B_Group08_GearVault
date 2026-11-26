@@ -27,10 +27,10 @@ const GearVaultPages = (() => {
     'cart.html',
     'checkout.html',
     'order-tracking.html',
-    'compare.html',
-    'wishlist.html',
-    'gaming-gear.html',
-    'flash-deals.html'
+    'pc-builder.html',
+    'flash-deals.html',
+    'prebuilt-pcs.html',
+    'benchmarks.html'
   ]);
 
   function initNestedLayout(activePage) {

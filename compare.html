@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="GearVault Hardware Comparison Tool - Side-by-side technical specification and price comparison.">
+  <title>Compare Hardware | GearVault</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/pages.css">
+
+  <style>
+    :is(a, button, input, select, textarea, [tabindex]):focus-visible {
+      outline: 2px solid var(--gv-cyan) !important;
+      outline-offset: 2px !important;
+      box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.35) !important;
+    }
+  </style>
+</head>
+<body>
+  <div id="gv-navbar-container"></div>
+
+  <main class="gv-section py-5">
+    <div class="container">
+      <div class="text-center mb-5">
+        <span class="gv-badge gv-badge-deal mb-2"><i class="bi bi-arrow-left-right"></i> SIDE-BY-SIDE</span>
+        <h1 class="text-white fs-2 mb-2" style="font-family: var(--gv-font-heading);">
+          COMPARE <span class="gradient-text-cyan-violet">HARDWARE &amp; GEAR</span>
+        </h1>
+        <p class="text-secondary small mx-auto" style="max-width: 500px;">
+          Compare real-world gaming performance, clock speeds, VRAM, and PKR rates.
+        </p>
+      </div>
+
+      <div class="gv-compare-table-wrap mb-4">
+        <table class="gv-compare-table">
+          <thead>
+            <tr>
+              <th>Specification</th>
+              <th>AMD Ryzen 7 7800X3D</th>
+              <th>Intel Core i7-14700K</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-secondary">Category</td>
+              <td class="text-white">Processor (AM5)</td>
+              <td class="text-white">Processor (LGA1700)</td>
+            </tr>
+            <tr>
+              <td class="text-secondary">Core / Thread Config</td>
+              <td class="text-cyan">8 Cores / 16 Threads</td>
+              <td class="text-violet">20 Cores (8P + 12E)</td>
+            </tr>
+            <tr>
+              <td class="text-secondary">Cache / Features</td>
+              <td class="text-white">96MB 3D V-Cache</td>
+              <td class="text-white">33MB Smart Cache</td>
+            </tr>
+            <tr>
+              <td class="text-secondary">Rated TDP Wattage</td>
+              <td class="text-cyan">120W</td>
+              <td class="text-warning">253W</td>
+            </tr>
+            <tr>
+              <td class="text-secondary">Price (PKR)</td>
+              <td class="text-cyan fw-bold font-monospace">Rs. 135,000</td>
+              <td class="text-violet fw-bold font-monospace">Rs. 125,000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="text-center">
+        <a href="pages/pc-builder.html" class="gv-btn gv-btn-cyan gv-btn-sm me-2">
+          <i class="bi bi-tools"></i> Custom PC Builder
+        </a>
+        <a href="pages/benchmarks.html" class="gv-btn gv-btn-glass gv-btn-sm">
+          <i class="bi bi-speedometer2"></i> Game FPS Benchmarks
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <div id="gv-footer-container"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/data/products.js"></script>
+  <script src="js/utils/storage.js"></script>
+  <script src="js/utils/ui.js"></script>
+  <script src="js/components/navbar.js"></script>
+  <script src="js/components/footer.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof renderGameVaultNavbar === 'function') renderGameVaultNavbar('compare');
+      if (typeof renderGameVaultFooter === 'function') renderGameVaultFooter();
+    });
+  </script>
+</body>
+</html>
