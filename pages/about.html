@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="About GearVault (Section SE-B Group 08) - Our brand story, PC hardware engineering standards, FAQ, and store support contact.">
+  <title>About Us &amp; Support | GEARVAULT (Section SE-B Group 08)</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Shared GameVault / GearVault CSS Architecture -->
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/pages.css">
+
+  <!-- About Page Scoped Styles -->
+  <style>
+    /* Keyboard Focus Outlines */
+    :is(a, button, input, select, textarea, [tabindex]):focus-visible {
+      outline: 2px solid var(--gv-cyan) !important;
+      outline-offset: 2px !important;
+      box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.25) !important;
+    }
+
+    .gv-about-hero {
+      background:
+        radial-gradient(circle at 20% 25%, rgba(0, 212, 255, 0.14) 0%, transparent 50%),
+        radial-gradient(circle at 82% 75%, rgba(118, 87, 255, 0.14) 0%, transparent 55%);
+      border-bottom: 1px solid rgba(0, 212, 255, 0.15);
+    }
+
+    .gv-story-card {
+      background: linear-gradient(145deg, rgba(21, 31, 48, 0.95) 0%, rgba(13, 20, 34, 0.98) 100%);
+      border: 1px solid var(--gv-border-neon);
+      border-radius: var(--gv-radius-lg);
+      padding: 2rem;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.75), 0 0 25px rgba(0, 212, 255, 0.12);
+    }
+
+    .gv-milestone-step {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: 1rem;
+      background: rgba(9, 13, 22, 0.65);
+      border: 1px solid var(--gv-border-subtle);
+      border-radius: var(--gv-radius-md);
+      transition: border-color var(--gv-transition-fast), transform var(--gv-transition-fast);
+    }
+
+    .gv-milestone-step:hover {
+      border-color: var(--gv-border-neon);
+      transform: translateX(4px);
+    }
+
+    .gv-milestone-icon {
+      width: 42px;
+      height: 42px;
+      flex-shrink: 0;
+      border-radius: var(--gv-radius-sm);
+      background: var(--gv-cyan-dim);
+      border: 1px solid rgba(0, 212, 255, 0.35);
+      color: var(--gv-cyan);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    /* Smooth FAQ Accordion */
+    .gv-faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .gv-faq-item {
+      background: var(--gv-bg-card);
+      border: 1px solid var(--gv-border-subtle);
+      border-radius: var(--gv-radius-md);
+      overflow: hidden;
+      transition: border-color var(--gv-transition-normal), box-shadow var(--gv-transition-normal);
+    }
+
+    .gv-faq-item.open {
+      border-color: var(--gv-border-neon);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 0 0 18px rgba(0, 212, 255, 0.14);
+    }
+
+    .gv-faq-trigger {
+      width: 100%;
+      background: transparent;
+      border: none;
+      padding: 1.15rem 1.35rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      text-align: left;
+      color: var(--gv-text-primary);
+      font-family: var(--gv-font-heading);
+      font-size: 1.08rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      transition: color var(--gv-transition-fast), background var(--gv-transition-fast);
+    }
+
+    .gv-faq-trigger:hover {
+      color: var(--gv-cyan);
+      background: rgba(0, 212, 255, 0.04);
+    }
+
+    .gv-faq-item.open .gv-faq-trigger {
+      color: var(--gv-cyan);
+      background: rgba(0, 212, 255, 0.06);
+    }
+
+    .gv-faq-chevron {
+      width: 30px;
+      height: 30px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--gv-border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .gv-faq-item.open .gv-faq-chevron {
+      transform: rotate(180deg);
+      border-color: var(--gv-cyan);
+      color: var(--gv-cyan);
+      background: var(--gv-cyan-dim);
+    }
+
+    .gv-faq-panel {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.34s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .gv-faq-item.open .gv-faq-panel {
+      grid-template-rows: 1fr;
+    }
+
+    .gv-faq-panel-inner {
+      overflow: hidden;
+    }
+
+    .gv-faq-answer {
+      padding: 0 1.35rem 1.25rem;
+      color: var(--gv-text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.65;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 0.9rem;
+    }
+
+    /* Live Form Validation States */
+    .gv-input.is-invalid,
+    .gv-select.is-invalid,
+    .gv-textarea.is-invalid {
+      border-color: var(--gv-danger) !important;
+      box-shadow: 0 0 12px rgba(239, 68, 68, 0.28) !important;
+    }
+
+    .gv-input.is-valid,
+    .gv-select.is-valid,
+    .gv-textarea.is-valid {
+      border-color: var(--gv-success) !important;
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.22) !important;
+    }
+
+    .gv-field-feedback {
+      font-size: 0.82rem;
+      margin-top: 0.4rem;
+      min-height: 1.15rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .gv-field-feedback.error {
+      color: #ff6b6b;
+    }
+
+    .gv-field-feedback.valid {
+      color: var(--gv-success);
+    }
+
+    .gv-char-counter {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--gv-text-muted);
+    }
+
+    .gv-char-counter.ready {
+      color: var(--gv-success);
+    }
+
+    .gv-char-counter.short {
+      color: var(--gv-warning);
+    }
+
+    .gv-form-alert {
+      border-radius: var(--gv-radius-md);
+      padding: 0.9rem 1.1rem;
+      font-size: 0.92rem;
+      display: none;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 1.25rem;
+    }
+
+    .gv-form-alert.show {
+      display: flex;
+    }
+
+    .gv-form-alert.success {
+      background: rgba(16, 185, 129, 0.14);
+      border: 1px solid var(--gv-success);
+      color: #d1fae5;
+    }
+
+    .gv-form-alert.error {
+      background: rgba(239, 68, 68, 0.14);
+      border: 1px solid var(--gv-danger);
+      color: #fee2e2;
+    }
+
+    /* Footer AI Image Disclosure Banner */
+    .gv-ai-disclosure {
+      margin-bottom: 1.5rem;
+      padding: 0.9rem 1.2rem;
+      background: rgba(118, 87, 255, 0.1);
+      border: 1px solid var(--gv-border-violet);
+      border-left: 4px solid var(--gv-violet);
+      border-radius: var(--gv-radius-md);
+      color: var(--gv-text-secondary);
+      font-size: 0.84rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .gv-ai-disclosure strong {
+      color: var(--gv-text-primary);
+    }
+
+    .gv-faq-search-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+      align-items: center;
+    }
+
+    .gv-faq-search-wrap {
+      position: relative;
+      flex: 1 1 220px;
+      min-width: 0;
+    }
+
+    .gv-faq-search-wrap i {
+      position: absolute;
+      left: 0.9rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gv-text-muted);
+      pointer-events: none;
+    }
+
+    .gv-faq-search-input {
+      padding-left: 2.5rem;
+    }
+
+    @media (max-width: 576px) {
+      .gv-about-hero {
+        padding: 2.5rem 0 !important;
+      }
+      .gv-story-card,
+      .gv-card {
+        padding: 1.2rem;
+      }
+      .gv-faq-trigger {
+        font-size: 0.96rem;
+        padding: 1rem;
+      }
+      .gv-faq-answer {
+        padding: 0.85rem 1rem 1rem;
+        font-size: 0.9rem;
+      }
+      .gv-ai-disclosure {
+        padding: 0.85rem 1rem;
+        font-size: 0.8rem;
+      }
+      #contact-submit-btn {
+        width: 100%;
+      }
+      .gv-toast-container {
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+      }
+      .gv-toast {
+        min-width: 0;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Dynamic Shared Navbar -->
+  <div id="gv-navbar-container"></div>
+
+  <!-- Hero Section -->
+  <section class="gv-hero gv-about-hero py-5">
+    <div class="container">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-7 gv-hero-content">
+          <div class="gv-hero-badge">
+            <i class="bi bi-cpu-fill text-cyan"></i> Section SE-B &bull; Group 08 Semester Project
+          </div>
+          <h1 class="mb-3">
+            ABOUT <span class="gradient-text-cyan-violet">GEARVAULT</span>
+          </h1>
+          <p class="fs-5 text-secondary mb-4" style="max-width: 610px;">
+            Engineered by Section SE-B Group 08 as a full-featured gaming hardware and custom PC storefront tailored for Pakistani enthusiasts, transparent PKR pricing, and zero-guesswork compatibility.
+          </p>
+          <div class="d-flex flex-wrap gap-3">
+            <a href="#brand-story" class="gv-btn gv-btn-cyan">
+              <i class="bi bi-journal-code"></i> Our Story
+            </a>
+            <a href="#faq-section" class="gv-btn gv-btn-outline-cyan">
+              <i class="bi bi-question-circle"></i> Read FAQs
+            </a>
+            <a href="#contact-section" class="gv-btn gv-btn-violet">
+              <i class="bi bi-headset"></i> Contact Support
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+          <div class="gv-story-card">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <span class="gv-badge gv-badge-cyan"><i class="bi bi-mortarboard-fill"></i> Project Identity</span>
+              <span class="small text-violet fw-bold">BS Software Engineering</span>
+            </div>
+            <h3 class="text-white mb-2">GEARVAULT / GAMEVAULT</h3>
+            <p class="small text-secondary mb-3">
+              A client-side e-commerce platform combining live hardware compatibility checks, flash deal countdowns, wattage estimation, and persistent shopping workflows.
+            </p>
+            <div class="row g-3 pt-3 border-top border-secondary border-opacity-25 text-center">
+              <div class="col-4">
+                <div class="h4 fw-bold text-cyan mb-0">SE-B</div>
+                <div class="small text-secondary">Section</div>
+              </div>
+              <div class="col-4">
+                <div class="h4 fw-bold text-violet mb-0">GRP 08</div>
+                <div class="small text-secondary">Team</div>
+              </div>
+              <div class="col-4">
+                <div class="h4 fw-bold text-white mb-0">PKR</div>
+                <div class="small text-secondary">Local Rates</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Brand Story Sections -->
+  <section id="brand-story" class="gv-section">
+    <div class="container">
+      <div class="gv-section-title-wrap">
+        <span class="gv-section-tag">Our Origin &amp; Mission</span>
+        <h2>BUILT FOR ENTHUSIASTS, BY BUILDERS</h2>
+        <p>Why GearVault exists and how we elevate hardware shopping in Pakistan</p>
+      </div>
+
+      <div class="row g-4 align-items-stretch mb-5">
+        <div class="col-lg-6">
+          <div class="gv-card h-100 border-cyan">
+            <div class="d-flex align-items-center gap-3 mb-3">
+              <div class="gv-milestone-icon">
+                <i class="bi bi-rocket-takeoff-fill"></i>
+              </div>
+              <div>
+                <span class="text-cyan small fw-bold text-uppercase">Chapter 01 &bull; The Spark</span>
+                <h3 class="mb-0 text-white">Solving Hardware Guesswork</h3>
+              </div>
+            </div>
+            <p class="text-secondary">
+              Gamers and creators in Pakistan frequently struggle with outdated spec sheets, hidden exchange markups, and costly socket or RAM mismatches when sourcing PC components online.
+            </p>
+            <p class="text-secondary mb-0">
+              GearVault (Section SE-B, Group 08) was conceived to replace cluttered spreadsheets with an interactive dark-mode storefront where every CPU, GPU, motherboard, and peripheral includes verified specs, real-world PKR pricing, and instant compatibility insights.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="gv-card h-100 border-violet">
+            <div class="d-flex align-items-center gap-3 mb-3">
+              <div class="gv-milestone-icon" style="background: var(--gv-violet-dim); border-color: rgba(118, 87, 255, 0.4); color: var(--gv-violet);">
+                <i class="bi bi-shield-check"></i>
+              </div>
+              <div>
+                <span class="text-violet small fw-bold text-uppercase">Chapter 02 &bull; Our Standard</span>
+                <h3 class="mb-0 text-white">Precision, Thermals &amp; Trust</h3>
+              </div>
+            </div>
+            <p class="text-secondary">
+              Whether you are picking up an RTX 4070 Super on Flash Deals or assembling an AM5 Ryzen 7800X3D workstation from scratch, every flow in GearVault is designed around clarity and speed.
+            </p>
+            <p class="text-secondary mb-0">
+              Our platform integrates dynamic catalog filtering, live countdown drops, PSU wattage estimation, side-by-side gear comparison, and instant local cart &amp; wishlist persistence with zero backend friction.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Brand Pillars / Journey -->
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-3">
+          <div class="gv-milestone-step h-100">
+            <div class="gv-milestone-icon"><i class="bi bi-patch-check-fill"></i></div>
+            <div>
+              <h5 class="text-white fs-6 mb-1">100% Authentic Parts</h5>
+              <p class="small text-secondary mb-0">Curated catalog of factory-sealed gear from AMD, Intel, ASUS, Corsair, Razer, and Logitech.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="gv-milestone-step h-100">
+            <div class="gv-milestone-icon"><i class="bi bi-tools"></i></div>
+            <div>
+              <h5 class="text-white fs-6 mb-1">Smart Compatibility</h5>
+              <p class="small text-secondary mb-0">Automated AM5/LGA1700 socket checks, DDR5/DDR4 validation, and live TDP wattage math.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="gv-milestone-step h-100">
+            <div class="gv-milestone-icon"><i class="bi bi-lightning-charge-fill text-warning"></i></div>
+            <div>
+              <h5 class="text-white fs-6 mb-1">Verified PKR Drops</h5>
+              <p class="small text-secondary mb-0">Transparent Pakistani Rupee pricing with live flash deal timers and stock progress tracking.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="gv-milestone-step h-100">
+            <div class="gv-milestone-icon"><i class="bi bi-truck"></i></div>
+            <div>
+              <h5 class="text-white fs-6 mb-1">Nationwide Coverage</h5>
+              <p class="small text-secondary mb-0">Simulated insured dispatch workflows covering Karachi, Lahore, Islamabad, Rawalpindi, and beyond.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive FAQ Accordion Section -->
+  <section id="faq-section" class="gv-section bg-secondary bg-opacity-10">
+    <div class="container">
+      <div class="gv-section-title-wrap">
+        <span class="gv-section-tag">Knowledge Base</span>
+        <h2>FREQUENTLY ASKED QUESTIONS</h2>
+        <p>Click any question below to smoothly expand or collapse detailed answers</p>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-9">
+          <div class="gv-faq-search-bar">
+            <div class="gv-faq-search-wrap">
+              <i class="bi bi-search" aria-hidden="true"></i>
+              <input type="search" id="faq-search-input" class="gv-input gv-faq-search-input" placeholder="Search FAQs (e.g. warranty, PC builder, flash deals, localStorage)..." aria-label="Search frequently asked questions">
+            </div>
+            <span id="faq-match-count" class="small text-secondary text-nowrap">5 topics</span>
+          </div>
+
+          <div id="gv-faq-empty" class="gv-empty-state d-none" role="status" aria-live="polite">
+            <div class="gv-empty-icon"><i class="bi bi-question-circle" aria-hidden="true"></i></div>
+            <h3 class="gv-empty-title">No Matching FAQ Topics</h3>
+            <p class="text-secondary mb-4">Try another keyword or clear the FAQ filter to view all answers.</p>
+            <button type="button" id="faq-reset-btn" class="gv-btn gv-btn-cyan">
+              <i class="bi bi-arrow-counterclockwise" aria-hidden="true"></i> Clear FAQ Search
+            </button>
+          </div>
+
+          <div id="gv-faq-accordion" class="gv-faq-list">
+            <div class="gv-faq-item open">
+              <button type="button" class="gv-faq-trigger" aria-expanded="true" aria-controls="faq-panel-1" id="faq-btn-1">
+                <span>1. Are all PC components and gaming peripherals on GearVault genuine?</span>
+                <span class="gv-faq-chevron"><i class="bi bi-chevron-down"></i></span>
+              </button>
+              <div class="gv-faq-panel" id="faq-panel-1" role="region" aria-labelledby="faq-btn-1">
+                <div class="gv-faq-panel-inner">
+                  <div class="gv-faq-answer">
+                    Yes. Within our storefront simulation, all listed processors, graphics cards, motherboards, SSDs, and peripherals represent factory-sealed, brand-authorized SKUs with official distributor warranties and verified PKR market pricing.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="gv-faq-item">
+              <button type="button" class="gv-faq-trigger" aria-expanded="false" aria-controls="faq-panel-2" id="faq-btn-2">
+                <span>2. How does the Custom PC Builder prevent incompatible part selections?</span>
+                <span class="gv-faq-chevron"><i class="bi bi-chevron-down"></i></span>
+              </button>
+              <div class="gv-faq-panel" id="faq-panel-2" role="region" aria-labelledby="faq-btn-2">
+                <div class="gv-faq-panel-inner">
+                  <div class="gv-faq-answer">
+                    Our builder engine inspects CPU socket types (such as AM5 and LGA1700), motherboard chipset and DDR5/DDR4 memory support, GPU chassis clearance, and cumulative TDP wattage so you know your PSU has sufficient headroom before checkout.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="gv-faq-item">
+              <button type="button" class="gv-faq-trigger" aria-expanded="false" aria-controls="faq-panel-3" id="faq-btn-3">
+                <span>3. How do Flash Deals, countdown timers, and stock progress bars work?</span>
+                <span class="gv-faq-chevron"><i class="bi bi-chevron-down"></i></span>
+              </button>
+              <div class="gv-faq-panel" id="faq-panel-3" role="region" aria-labelledby="faq-btn-3">
+                <div class="gv-faq-panel-inner">
+                  <div class="gv-faq-answer">
+                    On the <a href="flash-deals.html">Flash Deals</a> page, discounted hardware drops are filtered dynamically from the product catalog, displaying original vs. sale PKR prices, instant percentage savings, live ticking countdowns, and real-time remaining unit indicators.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="gv-faq-item">
+              <button type="button" class="gv-faq-trigger" aria-expanded="false" aria-controls="faq-panel-4" id="faq-btn-4">
+                <span>4. Why do my Cart and Wishlist stay saved when I refresh or switch pages?</span>
+                <span class="gv-faq-chevron"><i class="bi bi-chevron-down"></i></span>
+              </button>
+              <div class="gv-faq-panel" id="faq-panel-4" role="region" aria-labelledby="faq-btn-4">
+                <div class="gv-faq-panel-inner">
+                  <div class="gv-faq-answer">
+                    GearVault uses browser <code>localStorage</code> persistence across the catalog, Flash Deals, Cart, Wishlist, and Order Tracking pages so your selected hardware and saved items remain intact without requiring a backend database.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="gv-faq-item">
+              <button type="button" class="gv-faq-trigger" aria-expanded="false" aria-controls="faq-panel-5" id="faq-btn-5">
+                <span>5. Is GearVault an actual commercial store or an academic semester project?</span>
+                <span class="gv-faq-chevron"><i class="bi bi-chevron-down"></i></span>
+              </button>
+              <div class="gv-faq-panel" id="faq-panel-5" role="region" aria-labelledby="faq-btn-5">
+                <div class="gv-faq-panel-inner">
+                  <div class="gv-faq-answer">
+                    GearVault (GameVault) is an educational Web Technologies semester project built by <strong>Section SE-B, Group 08</strong>. All checkout, payment badges, and order tracking flows are front-end simulations—no real financial transactions or physical shipments occur.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Store / Support Contact Form Section -->
+  <section id="contact-section" class="gv-section">
+    <div class="container">
+      <div class="gv-section-title-wrap">
+        <span class="gv-section-tag">Store &amp; Technical Support</span>
+        <h2>GET IN TOUCH WITH GEARVAULT</h2>
+        <p>Questions about component compatibility, warranty coverage, or Flash Deals? Message our Section SE-B Group 08 desk</p>
+      </div>
+
+      <div class="row g-4 align-items-stretch">
+        <!-- Store Support Info Column -->
+        <div class="col-lg-5">
+          <div class="gv-card h-100 border-violet">
+            <span class="gv-badge gv-badge-cyan align-self-start mb-3">
+              <i class="bi bi-headset"></i> Support Desk
+            </span>
+            <h3 class="text-white mb-3">PAKISTAN HARDWARE HUB</h3>
+            <p class="text-secondary small mb-4">
+              Our simulated hardware engineering and customer care desk assists with custom rig quotes, RMA guidance, and esports gear inquiries.
+            </p>
+
+            <div class="d-flex flex-column gap-3 mb-4">
+              <div class="gv-milestone-step">
+                <div class="gv-milestone-icon"><i class="bi bi-geo-alt-fill"></i></div>
+                <div>
+                  <div class="text-white fw-bold small">Showroom &amp; Build Lab (Simulated)</div>
+                  <div class="text-secondary small">Blue Area Hardware Plaza &bull; Islamabad / Nationwide Dispatch</div>
+                </div>
+              </div>
+              <div class="gv-milestone-step">
+                <div class="gv-milestone-icon"><i class="bi bi-envelope-fill"></i></div>
+                <div>
+                  <div class="text-white fw-bold small">Support Email</div>
+                  <div class="text-cyan small">support@gearvault-group08.edu.pk</div>
+                </div>
+              </div>
+              <div class="gv-milestone-step">
+                <div class="gv-milestone-icon"><i class="bi bi-clock-fill"></i></div>
+                <div>
+                  <div class="text-white fw-bold small">Operating Hours</div>
+                  <div class="text-secondary small">Mon &ndash; Sat: 11:00 AM &ndash; 9:00 PM PKT</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-auto p-3 rounded" style="background: rgba(0, 212, 255, 0.06); border: 1px solid rgba(0, 212, 255, 0.2);">
+              <div class="small text-cyan fw-bold mb-1"><i class="bi bi-lightning-charge-fill text-warning me-1"></i> Section SE-B &bull; Group 08</div>
+              <div class="small text-secondary">
+                Built with semantic HTML5, modular CSS3, Bootstrap 5, and Vanilla JavaScript.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Validated Support Contact Form -->
+        <div class="col-lg-7">
+          <div class="gv-card h-100 border-cyan">
+            <h3 class="text-white mb-1"><i class="bi bi-chat-square-text text-cyan me-2"></i> Send a Support Inquiry</h3>
+            <p class="small text-secondary mb-4">All fields validate live as you type. Minimum message length is 20 characters.</p>
+
+            <!-- Inline Form Status Banner -->
+            <div id="contact-form-status" class="gv-form-alert" role="status" aria-live="polite"></div>
+
+            <form id="gv-contact-form" novalidate>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <div class="gv-form-group mb-0">
+                    <label for="contact-name" class="gv-label">Full Name <span class="text-danger">*</span></label>
+                    <input type="text" id="contact-name" name="name" class="gv-input" placeholder="e.g. Hamza Siddiqui" autocomplete="name" required>
+                    <div id="contact-name-feedback" class="gv-field-feedback" aria-live="polite"></div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="gv-form-group mb-0">
+                    <label for="contact-email" class="gv-label">Email Address <span class="text-danger">*</span></label>
+                    <input type="email" id="contact-email" name="email" class="gv-input" placeholder="e.g. hamza@example.com" autocomplete="email" required>
+                    <div id="contact-email-feedback" class="gv-field-feedback" aria-live="polite"></div>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <div class="gv-form-group mb-0">
+                    <label for="contact-inquiry" class="gv-label">Inquiry Type <span class="text-danger">*</span></label>
+                    <select id="contact-inquiry" name="inquiryType" class="gv-select" required>
+                      <option value="">-- Select an inquiry category --</option>
+                      <option value="compatibility">PC Build &amp; Part Compatibility</option>
+                      <option value="flash-deals">Flash Deals &amp; Stock Availability</option>
+                      <option value="order-support">Order Tracking &amp; Warranty Claim</option>
+                      <option value="esports-quote">Esports / Bulk Lab Hardware Quote</option>
+                      <option value="general">General Feedback &amp; Project Inquiry</option>
+                    </select>
+                    <div id="contact-inquiry-feedback" class="gv-field-feedback" aria-live="polite"></div>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <div class="gv-form-group mb-0">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                      <label for="contact-message" class="gv-label mb-0">Message <span class="text-danger">*</span></label>
+                      <span id="contact-char-counter" class="gv-char-counter">0 / 500 (min 20)</span>
+                    </div>
+                    <textarea id="contact-message" name="message" rows="5" maxlength="500" class="gv-textarea" placeholder="Describe your hardware question, target resolution, or support ticket details..." required></textarea>
+                    <div id="contact-message-feedback" class="gv-field-feedback" aria-live="polite"></div>
+                  </div>
+                </div>
+
+                <div class="col-12 pt-2 d-flex flex-wrap align-items-center justify-content-between gap-3">
+                  <span class="small text-secondary">
+                    <i class="bi bi-lock-fill text-cyan me-1"></i> Simulated ticket logging in browser session
+                  </span>
+                  <button type="submit" id="contact-submit-btn" class="gv-btn gv-btn-cyan">
+                    <i class="bi bi-send-fill"></i> Send Support Message
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dynamic Shared Footer -->
+  <div id="gv-footer-container"></div>
+
+  <!-- Bootstrap 5 Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- GameVault Core Data & Scripts -->
+  <script src="../js/data/products.js"></script>
+  <script src="../js/utils/storage.js"></script>
+  <script src="../js/utils/ui.js"></script>
+  <script src="../js/components/navbar.js"></script>
+  <script src="../js/components/footer.js"></script>
+
+  <!-- About Page Controller (FAQ Accordion, Live Contact Validation, Footer AI Disclosure) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Render shared navbar and footer
+      if (typeof renderGameVaultNavbar === 'function') {
+        renderGameVaultNavbar('about');
+      }
+      if (typeof renderGameVaultFooter === 'function') {
+        renderGameVaultFooter();
+      }
+      normalizeNestedAboutLinks();
+      injectFooterAiImageDisclosure();
+      if (typeof updateBadgeCounters === 'function') {
+        updateBadgeCounters();
+      }
+
+      // 2. Initialize interactive components
+      initFaqAccordion();
+      initContactFormValidation();
+    });
+
+    /**
+     * Adjust root-relative index.html links inside navbar/footer when running under /pages/.
+     */
+    function normalizeNestedAboutLinks() {
+      if (!window.location.pathname.includes('/pages/')) return;
+      const containers = [
+        document.getElementById('gv-navbar-container'),
+        document.getElementById('gv-footer-container')
+      ];
+      containers.forEach(container => {
+        if (!container) return;
+        container.querySelectorAll('a[href="index.html"]').forEach(link => {
+          link.setAttribute('href', '../index.html');
+        });
+      });
+    }
+
+    /**
+     * Inject a visible AI Image Disclosure note inside the rendered footer.
+     */
+    function injectFooterAiImageDisclosure() {
+      const footerContainer = document.querySelector('#gv-footer-container footer .container');
+      if (!footerContainer || document.getElementById('gv-ai-image-disclosure')) return;
+
+      const disclosure = document.createElement('div');
+      disclosure.id = 'gv-ai-image-disclosure';
+      disclosure.className = 'gv-ai-disclosure';
+      disclosure.innerHTML = `
+        <i class="bi bi-image-alt text-violet fs-5 mt-1"></i>
+        <div>
+          <strong>AI Image Disclosure:</strong>
+          Product showcase imagery, hardware banners, and visual placeholders across GearVault (Section SE-B, Group 08) incorporate AI-generated or AI-enhanced visuals alongside curated stock photography strictly for academic demonstration and non-commercial UI presentation.
+        </div>
+      `;
+
+      const footerBottom = footerContainer.querySelector('.gv-footer-bottom');
+      if (footerBottom) {
+        footerContainer.insertBefore(disclosure, footerBottom);
+      } else {
+        footerContainer.appendChild(disclosure);
+      }
+    }
+
+    /**
+     * Interactive FAQ Accordion with smooth expand/collapse transitions.
+     */
+    function initFaqAccordion() {
+      const accordion = document.getElementById('gv-faq-accordion');
+      const searchInput = document.getElementById('faq-search-input');
+      const emptyState = document.getElementById('gv-faq-empty');
+      const resetBtn = document.getElementById('faq-reset-btn');
+      const matchCountEl = document.getElementById('faq-match-count');
+      if (!accordion) return;
+
+      const items = Array.from(accordion.querySelectorAll('.gv-faq-item'));
+
+      items.forEach(item => {
+        const trigger = item.querySelector('.gv-faq-trigger');
+        if (!trigger) return;
+
+        trigger.addEventListener('click', () => {
+          const isOpen = item.classList.contains('open');
+
+          // Collapse other items for a clean single-open accordion experience
+          items.forEach(other => {
+            if (other !== item) {
+              other.classList.remove('open');
+              const otherBtn = other.querySelector('.gv-faq-trigger');
+              if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
+            }
+          });
+
+          // Toggle clicked item
+          item.classList.toggle('open', !isOpen);
+          trigger.setAttribute('aria-expanded', String(!isOpen));
+        });
+      });
+
+      function filterFaqs(query) {
+        const q = (query || '').trim().toLowerCase();
+        let visibleCount = 0;
+
+        items.forEach(item => {
+          const matches = !q || item.textContent.toLowerCase().includes(q);
+          item.classList.toggle('d-none', !matches);
+          if (matches) visibleCount++;
+        });
+
+        if (matchCountEl) {
+          matchCountEl.textContent = `${visibleCount} ${visibleCount === 1 ? 'topic' : 'topics'}`;
+        }
+        if (emptyState) {
+          emptyState.classList.toggle('d-none', visibleCount > 0);
+        }
+      }
+
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => filterFaqs(e.target.value));
+      }
+      if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+          if (searchInput) {
+            searchInput.value = '';
+            searchInput.focus();
+          }
+          filterFaqs('');
+        });
+      }
+    }
+
+    /**
+     * Live JavaScript validation for the store/support contact form.
+     */
+    function initContactFormValidation() {
+      const form = document.getElementById('gv-contact-form');
+      const nameInput = document.getElementById('contact-name');
+      const emailInput = document.getElementById('contact-email');
+      const inquirySelect = document.getElementById('contact-inquiry');
+      const messageInput = document.getElementById('contact-message');
+      const charCounter = document.getElementById('contact-char-counter');
+      const statusBanner = document.getElementById('contact-form-status');
+
+      if (!form || !nameInput || !emailInput || !inquirySelect || !messageInput) return;
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const MIN_MESSAGE_LEN = 20;
+      const MAX_MESSAGE_LEN = 500;
+
+      function setFieldState(input, feedbackId, isValid, message) {
+        const feedbackEl = document.getElementById(feedbackId);
+        input.classList.toggle('is-valid', isValid);
+        input.classList.toggle('is-invalid', !isValid);
+        input.setAttribute('aria-invalid', String(!isValid));
+
+        if (feedbackEl) {
+          feedbackEl.className = `gv-field-feedback ${isValid ? 'valid' : 'error'}`;
+          feedbackEl.innerHTML = isValid
+            ? `<i class="bi bi-check-circle-fill"></i> <span>${message}</span>`
+            : `<i class="bi bi-exclamation-circle-fill"></i> <span>${message}</span>`;
+        }
+        return isValid;
+      }
+
+      function validateName() {
+        const val = nameInput.value.trim();
+        if (val.length === 0) {
+          return setFieldState(nameInput, 'contact-name-feedback', false, 'Please enter your full name.');
+        }
+        if (val.length < 2) {
+          return setFieldState(nameInput, 'contact-name-feedback', false, 'Name must be at least 2 characters.');
+        }
+        if (!/^[a-zA-Z\s.'-]+$/.test(val)) {
+          return setFieldState(nameInput, 'contact-name-feedback', false, 'Name can only contain letters, spaces, periods, or hyphens.');
+        }
+        return setFieldState(nameInput, 'contact-name-feedback', true, 'Looks good!');
+      }
+
+      function validateEmail() {
+        const val = emailInput.value.trim();
+        if (val.length === 0) {
+          return setFieldState(emailInput, 'contact-email-feedback', false, 'Email address is required.');
+        }
+        if (!emailRegex.test(val)) {
+          return setFieldState(emailInput, 'contact-email-feedback', false, 'Enter a valid email (e.g. name@domain.com).');
+        }
+        return setFieldState(emailInput, 'contact-email-feedback', true, 'Valid email format.');
+      }
+
+      function validateInquiry() {
+        const val = inquirySelect.value.trim();
+        if (!val) {
+          return setFieldState(inquirySelect, 'contact-inquiry-feedback', false, 'Please choose an inquiry type.');
+        }
+        return setFieldState(inquirySelect, 'contact-inquiry-feedback', true, 'Inquiry category selected.');
+      }
+
+      function updateCharCounter(len) {
+        if (!charCounter) return;
+        charCounter.textContent = `${len} / ${MAX_MESSAGE_LEN} (min ${MIN_MESSAGE_LEN})`;
+        charCounter.classList.remove('ready', 'short');
+        if (len >= MIN_MESSAGE_LEN) {
+          charCounter.classList.add('ready');
+        } else if (len > 0) {
+          charCounter.classList.add('short');
+        }
+      }
+
+      function validateMessage() {
+        const raw = messageInput.value;
+        const trimmed = raw.trim();
+        updateCharCounter(trimmed.length);
+
+        if (trimmed.length === 0) {
+          return setFieldState(messageInput, 'contact-message-feedback', false, 'Please enter your message.');
+        }
+        if (trimmed.length < MIN_MESSAGE_LEN) {
+          const remaining = MIN_MESSAGE_LEN - trimmed.length;
+          return setFieldState(
+            messageInput,
+            'contact-message-feedback',
+            false,
+            `Message is too short — add ${remaining} more character${remaining === 1 ? '' : 's'}.`
+          );
+        }
+        return setFieldState(messageInput, 'contact-message-feedback', true, 'Message length meets requirements.');
+      }
+
+      function showFormStatus(type, htmlContent) {
+        if (!statusBanner) return;
+        statusBanner.className = `gv-form-alert show ${type}`;
+        statusBanner.innerHTML = htmlContent;
+      }
+
+      function clearAllValidationStates() {
+        [nameInput, emailInput, inquirySelect, messageInput].forEach(el => {
+          el.classList.remove('is-valid', 'is-invalid');
+          el.removeAttribute('aria-invalid');
+        });
+        ['contact-name-feedback', 'contact-email-feedback', 'contact-inquiry-feedback', 'contact-message-feedback'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) {
+            el.className = 'gv-field-feedback';
+            el.innerHTML = '';
+          }
+        });
+        updateCharCounter(0);
+      }
+
+      // Live validation listeners
+      nameInput.addEventListener('input', validateName);
+      nameInput.addEventListener('blur', validateName);
+
+      emailInput.addEventListener('input', validateEmail);
+      emailInput.addEventListener('blur', validateEmail);
+
+      inquirySelect.addEventListener('change', validateInquiry);
+      inquirySelect.addEventListener('blur', validateInquiry);
+
+      messageInput.addEventListener('input', validateMessage);
+      messageInput.addEventListener('blur', validateMessage);
+
+      // Submit handler
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const isNameValid = validateName();
+        const isEmailValid = validateEmail();
+        const isInquiryValid = validateInquiry();
+        const isMessageValid = validateMessage();
+
+        if (!isNameValid || !isEmailValid || !isInquiryValid || !isMessageValid) {
+          showFormStatus(
+            'error',
+            `<i class="bi bi-exclamation-triangle-fill fs-5 mt-1"></i>
+             <div><strong>Please fix the highlighted fields</strong> before submitting your support inquiry.</div>`
+          );
+          if (typeof showToast === 'function') {
+            showToast('Please correct the highlighted form errors.', 'warning');
+          }
+          return;
+        }
+
+        const ticketId = 'GV-SUP-' + Math.floor(1000 + Math.random() * 9000);
+        const senderName = nameInput.value.trim();
+        const inquiryLabel = inquirySelect.options[inquirySelect.selectedIndex].text;
+
+        showFormStatus(
+          'success',
+          `<i class="bi bi-check-circle-fill fs-5 mt-1"></i>
+           <div>
+             <strong>Inquiry Received (${ticketId})!</strong> Thanks, ${senderName}. Your <em>${inquiryLabel}</em> message has been logged in this session.
+           </div>`
+        );
+
+        if (typeof showToast === 'function') {
+          showToast(`Support ticket <strong>${ticketId}</strong> submitted successfully!`, 'success');
+        }
+
+        form.reset();
+        clearAllValidationStates();
+      });
+    }
+  </script>
+
+</body>
+</html>
