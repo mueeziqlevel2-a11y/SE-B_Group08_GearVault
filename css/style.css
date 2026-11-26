@@ -1,0 +1,10 @@
+/* ==========================================================================
+   GEARVAULT / GAMEVAULT - Unified Style Sheet
+   Aggregates design tokens, base styles, UI components, layout, and pages
+   ========================================================================== */
+
+@import url('variables.css');
+@import url('base.css');
+@import url('components.css');
+@import url('layout.css');
+@import url('pages.css');
