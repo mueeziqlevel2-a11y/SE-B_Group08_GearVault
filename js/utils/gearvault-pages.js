@@ -26,7 +26,11 @@ const GearVaultPages = (() => {
   const NESTED_PAGE_FILES = new Set([
     'cart.html',
     'checkout.html',
-    'order-tracking.html'
+    'order-tracking.html',
+    'pc-builder.html',
+    'flash-deals.html',
+    'prebuilt-pcs.html',
+    'benchmarks.html'
   ]);
 
   function initNestedLayout(activePage) {

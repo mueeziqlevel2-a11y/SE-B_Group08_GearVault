@@ -15,6 +15,7 @@ const GAMEVAULT_PREBUILTS = [
     image: "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=500&auto=format&fit=crop&q=80",
     rating: 4.8,
     reviewCount: 29,
+    tier: "budget",
     targetResolution: "1080p Ultra High-Refresh",
     fpsSummary: "Valorant: 380 FPS | Warzone: 135 FPS | Apex Legends: 190 FPS",
     specs: {
@@ -40,6 +41,7 @@ const GAMEVAULT_PREBUILTS = [
     image: "https://images.unsplash.com/photo-1591488320449-011701bb6704?w=500&auto=format&fit=crop&q=80",
     rating: 4.9,
     reviewCount: 46,
+    tier: "mid-range",
     targetResolution: "1440p Max Settings",
     fpsSummary: "Cyberpunk 2077: 114 FPS | Black Myth Wukong: 98 FPS | COD: 220 FPS",
     specs: {
@@ -65,6 +67,7 @@ const GAMEVAULT_PREBUILTS = [
     image: "https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=500&auto=format&fit=crop&q=80",
     rating: 5.0,
     reviewCount: 18,
+    tier: "enthusiast",
     targetResolution: "4K Extreme Ray Tracing",
     fpsSummary: "Cyberpunk 4K: 82 FPS | Black Myth 4K: 68 FPS | MS Flight Sim: 95 FPS",
     specs: {
@@ -90,6 +93,7 @@ const GAMEVAULT_PREBUILTS = [
     image: "https://images.unsplash.com/photo-1555680202-c86f0e12f086?w=500&auto=format&fit=crop&q=80",
     rating: 4.9,
     reviewCount: 22,
+    tier: "mid-range",
     targetResolution: "Heavy 3D Render & 1440p Gaming",
     fpsSummary: "Blender Benchmark: 4800 Samples | Puget Premiere: 1250 Pts",
     specs: {

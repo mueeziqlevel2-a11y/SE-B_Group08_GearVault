@@ -116,6 +116,34 @@ const GAMEVAULT_BENCHMARKS = {
           { gpu: "MSI RTX 4060 Ventus", fps: 210, cpu: "i5-13600K", tier: "High" }
         ]
       }
+    },
+    {
+      id: "gta-v",
+      title: "Grand Theft Auto V",
+      genre: "Open World Action",
+      engine: "RAGE (Very High / Ultra)",
+      testedSettings: "Very High / Ultra Textures, FXAA + MSAA 4x",
+      image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500&auto=format&fit=crop&q=80",
+      scores: {
+        "1080p": [
+          { gpu: "ASUS ROG Strix RTX 4090", fps: 245, cpu: "Ryzen 7 7800X3D", tier: "Ultimate" },
+          { gpu: "Zotac RTX 4070 Super", fps: 215, cpu: "i7-14700K", tier: "Ultimate" },
+          { gpu: "Sapphire RX 7800 XT", fps: 195, cpu: "Ryzen 5 7600X", tier: "Ultimate" },
+          { gpu: "MSI RTX 4060 Ventus", fps: 165, cpu: "i5-13600K", tier: "High" }
+        ],
+        "1440p": [
+          { gpu: "ASUS ROG Strix RTX 4090", fps: 210, cpu: "Ryzen 7 7800X3D", tier: "Ultimate" },
+          { gpu: "Zotac RTX 4070 Super", fps: 180, cpu: "i7-14700K", tier: "Ultimate" },
+          { gpu: "Sapphire RX 7800 XT", fps: 165, cpu: "Ryzen 5 7600X", tier: "High" },
+          { gpu: "MSI RTX 4060 Ventus", fps: 125, cpu: "i5-13600K", tier: "High" }
+        ],
+        "4k": [
+          { gpu: "ASUS ROG Strix RTX 4090", fps: 160, cpu: "Ryzen 7 7800X3D", tier: "Ultimate" },
+          { gpu: "Zotac RTX 4070 Super", fps: 110, cpu: "i7-14700K", tier: "High" },
+          { gpu: "Sapphire RX 7800 XT", fps: 95, cpu: "Ryzen 5 7600X", tier: "Smooth" },
+          { gpu: "MSI RTX 4060 Ventus", fps: 68, cpu: "i5-13600K", tier: "Playable" }
+        ]
+      }
     }
   ]
 };
