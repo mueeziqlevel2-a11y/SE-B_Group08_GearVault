@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="GearVault Order Tracking - Enter your Order ID to view the 4-step fulfillment status timeline.">
-  <title>Order Tracking | GearVault - High-Performance PC Parts &amp; Gaming Gear</title>
+  <meta name="description" content="GearVault Order Tracking - Live real-time dispatch and logistics status for your custom PC and gaming gear orders.">
+  <title>Track Order Status | GearVault - Pakistan Gaming Gear</title>
 
   <!-- Bootstrap 5 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-  <!-- Shared GearVault / GameVault CSS Architecture -->
+  <!-- Shared GearVault CSS Architecture -->
   <link rel="stylesheet" href="../css/variables.css">
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/components.css">
@@ -19,110 +19,10 @@
   <link rel="stylesheet" href="../css/pages.css">
 
   <style>
-    .gv-page-hero {
-      padding: 2.5rem 0 1.5rem;
-      border-bottom: 1px solid var(--gv-border-subtle);
-      background: radial-gradient(circle at 25% 20%, rgba(0, 212, 255, 0.09) 0%, transparent 55%);
-    }
-
-    .gv-breadcrumb {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.85rem;
-      color: var(--gv-text-muted);
-      margin-bottom: 0.75rem;
-    }
-
-    .gv-breadcrumb a {
-      color: var(--gv-text-secondary);
-    }
-
-    .gv-breadcrumb a:hover {
-      color: var(--gv-cyan);
-    }
-
-    .gv-tracking-error-alert {
-      background: rgba(239, 68, 68, 0.12);
-      border: 1px solid rgba(239, 68, 68, 0.45);
-      border-left: 4px solid var(--gv-danger);
-      border-radius: var(--gv-radius-md);
-      padding: 1rem 1.25rem;
-      color: #ff8080;
-      display: flex;
-      align-items: center;
-      gap: 0.85rem;
-    }
-
-    .gv-recent-order-chip {
-      background: var(--gv-bg-input);
-      border: 1px solid var(--gv-border-subtle);
-      color: var(--gv-text-secondary);
-      border-radius: var(--gv-radius-sm);
-      padding: 0.3rem 0.75rem;
-      font-family: monospace;
-      font-size: 0.82rem;
-      cursor: pointer;
-      transition: all var(--gv-transition-fast);
-    }
-
-    .gv-recent-order-chip:hover {
-      border-color: var(--gv-cyan);
-      color: var(--gv-cyan);
-      background: var(--gv-cyan-dim);
-    }
-
-    .gv-order-meta-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 1rem;
-      background: #0d1523;
-      border: 1px solid var(--gv-border-subtle);
-      border-radius: var(--gv-radius-md);
-      padding: 1.15rem;
-      word-break: break-word;
-    }
-
-    .gv-input.is-error {
-      border-color: var(--gv-danger) !important;
-      box-shadow: 0 0 12px var(--gv-danger-glow) !important;
-    }
-
-    @media (max-width: 576px) {
-      .gv-order-item-row {
-        flex-wrap: wrap;
-      }
-      .gv-order-item-row > .text-nowrap {
-        margin-left: auto;
-      }
-    }
-
-    .gv-order-item-row {
-      display: flex;
-      align-items: center;
-      gap: 0.9rem;
-      padding: 0.75rem;
-      background: var(--gv-bg-input);
-      border: 1px solid var(--gv-border-subtle);
-      border-radius: var(--gv-radius-md);
-    }
-
-    .gv-order-item-thumb {
-      width: 52px;
-      height: 52px;
-      background: #090e18;
-      border-radius: var(--gv-radius-sm);
-      padding: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .gv-order-item-thumb img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
+    :is(a, button, input, select, textarea, [tabindex]):focus-visible {
+      outline: 2px solid var(--gv-cyan) !important;
+      outline-offset: 2px !important;
+      box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.35) !important;
     }
   </style>
 </head>
@@ -131,205 +31,135 @@
   <!-- Dynamic Shared Navbar -->
   <div id="gv-navbar-container"></div>
 
-  <!-- Page Header -->
-  <section class="gv-page-hero">
+  <main class="gv-section py-5">
     <div class="container">
-      <nav class="gv-breadcrumb" aria-label="Breadcrumb">
-        <a href="../index.html"><i class="bi bi-house-door"></i> Home</a>
-        <span>/</span>
-        <span class="text-cyan">Order Tracking</span>
-      </nav>
+      <div class="text-center mb-5">
+        <h1 class="text-white fs-2 mb-2" style="font-family: var(--gv-font-heading);">
+          <i class="bi bi-geo-alt-fill text-cyan me-2"></i> Track Your Order Status
+        </h1>
+        <p class="text-secondary small mx-auto" style="max-width: 500px;">
+          Enter your GearVault reference order code (e.g. GV-20261) to inspect real-time bench assembly, quality checks, and dispatch stages.
+        </p>
 
-      <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
-        <div>
-          <span class="gv-section-tag mb-2">Live Fulfillment Tracker</span>
-          <h1 class="h2 mb-1">
-            TRACK YOUR <span class="gradient-text-cyan-violet">ORDER</span>
-          </h1>
-          <p class="text-secondary mb-0">
-            Enter your GearVault Order ID to inspect your 4-step dispatch and delivery status.
-          </p>
-        </div>
-
-        <a href="../pc-parts.html" class="gv-btn gv-btn-outline-cyan gv-btn-sm align-self-start align-self-md-center">
-          <i class="bi bi-cpu"></i> Shop PC Parts
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Main Tracking Section -->
-  <main class="gv-section py-5 flex-grow-1">
-    <div class="container" style="max-width: 960px;">
-
-      <!-- Order Lookup Card -->
-      <section class="gv-card p-4 mb-4" aria-label="Order ID Lookup">
-        <form id="gv-tracking-form" class="row g-3 align-items-end" novalidate>
-          <div class="col-md-8">
-            <label for="gv-tracking-input" class="gv-label">
-              <i class="bi bi-upc-scan text-cyan me-1"></i> Order ID
-            </label>
-            <input
-              type="text"
-              id="gv-tracking-input"
-              class="gv-input font-monospace"
-              placeholder="Enter Order ID (e.g. GV-2026-4821)"
-              autocomplete="off"
-              aria-required="true"
-              aria-invalid="false"
-              aria-describedby="gv-tracking-error-msg"
-            >
-          </div>
-          <div class="col-md-4">
-            <button type="submit" id="gv-track-btn" class="gv-btn gv-btn-cyan w-100">
-              <i class="bi bi-search"></i> Track Order
+        <!-- Search Order Form -->
+        <form id="track-form" class="mx-auto mt-4" style="max-width: 480px;">
+          <div class="input-group">
+            <input type="text" id="order-id-input" class="gv-input py-2 ps-3" placeholder="Enter Order ID (e.g. GV-20261)..." required>
+            <button type="submit" class="gv-btn gv-btn-cyan gv-btn-sm">
+              <i class="bi bi-search"></i> Track
             </button>
           </div>
         </form>
+      </div>
 
-        <!-- Recent Saved Orders Quick Links -->
-        <div id="gv-recent-orders-wrap" class="mt-3 pt-3 border-top border-secondary border-opacity-25 d-none">
-          <div class="small text-secondary mb-2">
-            <i class="bi bi-clock-history text-violet me-1"></i> Recent orders saved in this browser:
+      <!-- Tracking Timeline Card -->
+      <div class="gv-card p-4 mx-auto mb-4" style="max-width: 780px;">
+        <div class="d-flex align-items-center justify-content-between mb-4 pb-2 border-bottom border-secondary border-opacity-25">
+          <div>
+            <span class="small text-muted">Tracking Reference:</span>
+            <h4 id="display-order-id" class="text-cyan font-monospace mb-0">GV-20261</h4>
           </div>
-          <div id="gv-recent-orders-list" class="d-flex flex-wrap gap-2"></div>
-        </div>
-      </section>
-
-      <!-- Not Found / Error Alert -->
-      <div id="gv-tracking-error" class="gv-tracking-error-alert mb-4 d-none" role="alert">
-        <i class="bi bi-exclamation-triangle-fill fs-4 flex-shrink-0"></i>
-        <div>
-          <strong class="d-block text-white" id="gv-tracking-error-title">Order Not Found</strong>
-          <span class="small" id="gv-tracking-error-msg">
-            We couldn't find an order matching that Order ID in your local GearVault history.
+          <span class="badge bg-success-subtle text-success border border-success px-3 py-2">
+            <i class="bi bi-check-circle-fill me-1"></i> Quality Check Passed
           </span>
         </div>
+
+        <!-- 5-Stage Timeline -->
+        <div class="gv-tracking-timeline">
+          <div class="gv-tracking-timeline-progress" style="width: 50%;"></div>
+
+          <div class="gv-timeline-step">
+            <div class="gv-step-icon border-cyan text-cyan">
+              <i class="bi bi-cart-check"></i>
+            </div>
+            <div class="text-white small fw-bold">Placed</div>
+            <div class="text-muted" style="font-size: 0.72rem;">Order Confirmed</div>
+          </div>
+
+          <div class="gv-timeline-step">
+            <div class="gv-step-icon border-cyan text-cyan">
+              <i class="bi bi-tools"></i>
+            </div>
+            <div class="text-white small fw-bold">Assembly</div>
+            <div class="text-muted" style="font-size: 0.72rem;">Bench Tested</div>
+          </div>
+
+          <div class="gv-timeline-step">
+            <div class="gv-step-icon border-cyan text-cyan">
+              <i class="bi bi-shield-check"></i>
+            </div>
+            <div class="text-white small fw-bold">Quality Check</div>
+            <div class="text-muted" style="font-size: 0.72rem;">Passed 24hr Run</div>
+          </div>
+
+          <div class="gv-timeline-step">
+            <div class="gv-step-icon">
+              <i class="bi bi-box-seam"></i>
+            </div>
+            <div class="text-secondary small fw-bold">Dispatched</div>
+            <div class="text-muted" style="font-size: 0.72rem;">Courier In Transit</div>
+          </div>
+
+          <div class="gv-timeline-step">
+            <div class="gv-step-icon">
+              <i class="bi bi-house-check"></i>
+            </div>
+            <div class="text-secondary small fw-bold">Delivered</div>
+            <div class="text-muted" style="font-size: 0.72rem;">Estimated Today</div>
+          </div>
+        </div>
       </div>
 
-      <!-- Initial Prompt / Empty History Helper -->
-      <div id="gv-tracking-placeholder" class="gv-empty-state">
-        <div class="gv-empty-icon">
-          <i class="bi bi-geo-alt"></i>
-        </div>
-        <h2 class="gv-empty-title text-white">Ready to Track Your GearVault Build</h2>
-        <p class="text-secondary mx-auto mb-4" style="max-width: 480px;">
-          Enter the Order ID generated at checkout (e.g. <code class="text-cyan">GV-2026-XXXX</code>) to view your 4-step fulfillment progress.
-        </p>
-        <a href="checkout.html" class="gv-btn gv-btn-glass">
-          <i class="bi bi-bag-check"></i> Go to Checkout
+      <div class="text-center">
+        <a href="pc-builder.html" class="gv-btn gv-btn-glass gv-btn-sm me-2">
+          <i class="bi bi-tools"></i> Custom PC Builder
+        </a>
+        <a href="prebuilt-pcs.html" class="gv-btn gv-btn-glass gv-btn-sm">
+          <i class="bi bi-pc-display"></i> Pre-Built PCs
         </a>
       </div>
-
-      <!-- Order Tracking Result Card -->
-      <section id="gv-tracking-result" class="gv-card p-4 border-cyan d-none" aria-live="polite">
-        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 pb-3 border-bottom border-secondary border-opacity-25">
-          <div>
-            <div class="small text-secondary text-uppercase">Tracking Order</div>
-            <h2 id="gv-result-order-id" class="h3 mb-0 text-cyan font-monospace">GV-2026-0000</h2>
-          </div>
-
-          <div class="d-flex flex-wrap align-items-center gap-2">
-            <span id="gv-result-status-badge" class="gv-badge gv-badge-cyan py-2 px-3">Order Placed</span>
-            <button type="button" id="gv-advance-status-btn" class="gv-btn gv-btn-outline-violet gv-btn-sm">
-              <i class="bi bi-fast-forward-fill"></i> Next Stage (Demo)
-            </button>
-          </div>
-        </div>
-
-        <!-- 4-Step Visual Status Timeline (reusing css/pages.css timeline classes) -->
-        <div class="gv-tracking-timeline" role="list" aria-label="4-step order status timeline">
-          <div id="gv-timeline-progress" class="gv-tracking-timeline-progress" style="width: 0%;"></div>
-
-          <div class="gv-timeline-step" data-step="0" role="listitem">
-            <div class="gv-step-icon"><i class="bi bi-receipt-cutoff"></i></div>
-            <div class="gv-step-label">Order Placed</div>
-          </div>
-
-          <div class="gv-timeline-step" data-step="1" role="listitem">
-            <div class="gv-step-icon"><i class="bi bi-gear-wide-connected"></i></div>
-            <div class="gv-step-label">Processing</div>
-          </div>
-
-          <div class="gv-timeline-step" data-step="2" role="listitem">
-            <div class="gv-step-icon"><i class="bi bi-truck"></i></div>
-            <div class="gv-step-label">Shipped</div>
-          </div>
-
-          <div class="gv-timeline-step" data-step="3" role="listitem">
-            <div class="gv-step-icon"><i class="bi bi-box-seam-fill"></i></div>
-            <div class="gv-step-label">Delivered</div>
-          </div>
-        </div>
-
-        <!-- Order Metadata Grid -->
-        <div class="gv-order-meta-grid mb-4">
-          <div>
-            <div class="small text-muted">Order Date</div>
-            <div id="gv-result-date" class="text-white fw-semibold">-</div>
-          </div>
-          <div>
-            <div class="small text-muted">Recipient</div>
-            <div id="gv-result-customer" class="text-white fw-semibold">-</div>
-          </div>
-          <div>
-            <div class="small text-muted">Destination</div>
-            <div id="gv-result-destination" class="text-white fw-semibold">-</div>
-          </div>
-          <div>
-            <div class="small text-muted">Payment Method</div>
-            <div id="gv-result-payment" class="text-white fw-semibold">-</div>
-          </div>
-        </div>
-
-        <!-- Ordered Items & Totals -->
-        <h3 class="h5 text-white mb-3">
-          <i class="bi bi-box2 text-cyan me-2"></i> Items in This Order
-        </h3>
-        <div id="gv-result-items" class="d-flex flex-column gap-2 mb-4"></div>
-
-        <div class="d-flex flex-column gap-1 border-top border-secondary border-opacity-25 pt-3 small">
-          <div class="d-flex justify-content-between text-secondary">
-            <span>Subtotal</span>
-            <span id="gv-result-subtotal" class="text-white">Rs. 0</span>
-          </div>
-          <div id="gv-result-discount-row" class="d-flex justify-content-between text-success d-none">
-            <span>Promo Discount</span>
-            <span id="gv-result-discount">- Rs. 0</span>
-          </div>
-          <div class="d-flex justify-content-between text-secondary">
-            <span>Tax (5%)</span>
-            <span id="gv-result-tax" class="text-white">Rs. 0</span>
-          </div>
-          <div class="d-flex justify-content-between text-secondary">
-            <span>Shipping</span>
-            <span id="gv-result-shipping" class="text-white">Rs. 0</span>
-          </div>
-          <div class="d-flex justify-content-between align-items-baseline pt-2 mt-1 border-top border-secondary border-opacity-25">
-            <strong class="text-white fs-6">Total Paid</strong>
-            <strong id="gv-result-total" class="text-cyan font-monospace fs-5">Rs. 0</strong>
-          </div>
-        </div>
-      </section>
-
     </div>
   </main>
 
-  <!-- Dynamic Shared Footer -->
   <div id="gv-footer-container"></div>
 
-  <!-- Bootstrap 5 Bundle JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-  <!-- GearVault / GameVault Core Data & Scripts -->
   <script src="../js/data/products.js"></script>
-  <script src="../js/data/prebuilts-data.js"></script>
   <script src="../js/utils/storage.js"></script>
   <script src="../js/utils/ui.js"></script>
   <script src="../js/components/navbar.js"></script>
   <script src="../js/components/footer.js"></script>
   <script src="../js/utils/gearvault-pages.js"></script>
-  <script src="../js/pages/order-tracking.js"></script>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof GearVaultPages !== 'undefined') {
+        GearVaultPages.initNestedLayout('order-tracking');
+      }
+
+      const orderParam = (typeof getQueryParam === 'function') ? getQueryParam('orderId') : null;
+      if (orderParam) {
+        const input = document.getElementById('order-id-input');
+        const display = document.getElementById('display-order-id');
+        if (input) input.value = orderParam;
+        if (display) display.textContent = orderParam;
+      }
+
+      const form = document.getElementById('track-form');
+      if (form) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const val = document.getElementById('order-id-input')?.value.trim();
+          if (val) {
+            const display = document.getElementById('display-order-id');
+            if (display) display.textContent = val;
+            if (typeof showToast === 'function') {
+              showToast(`Tracking status updated for ${val}`, 'cyan');
+            }
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>

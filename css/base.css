@@ -153,6 +153,13 @@ a:hover {
   display: inline-block;
 }
 
+/* Accessible High-Contrast Keyboard Focus Outlines */
+:is(a, button, input, select, textarea, [tabindex], .gv-btn, .gv-action-btn, .gv-tier-tab, .gv-res-pill, .gv-preset-chip, .gv-bench-preset-chip, .gv-hamburger):focus-visible {
+  outline: 2px solid var(--gv-cyan) !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.35) !important;
+}
+
 /* Card & Background Utilities */
 .bg-card {
   background-color: var(--gv-bg-card) !important;

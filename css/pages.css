@@ -301,7 +301,7 @@
   }
   .gv-tracking-timeline {
     flex-direction: column;
-    gap: 1.8rem;
+    gap: 1.5rem;
     margin: 2rem 0;
   }
   .gv-tracking-timeline::before,
@@ -313,5 +313,138 @@
     width: 100%;
     text-align: left;
     gap: 1rem;
+  }
+  .gv-step-icon {
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+}
+
+/* Accessible Neon Cyan Focus Outlines & Mobile (375px) Stacking Polish */
+.gv-input:focus,
+.gv-input:focus-visible,
+.gv-select:focus,
+.gv-select:focus-visible,
+.gv-textarea:focus,
+.gv-textarea:focus-visible {
+  outline: 2px solid var(--gv-cyan) !important;
+  outline-offset: 2px;
+  border-color: var(--gv-cyan);
+  box-shadow: 0 0 14px var(--gv-cyan-glow);
+}
+
+.gv-input.is-error:focus,
+.gv-input.is-error:focus-visible,
+.gv-select.is-error:focus-visible,
+.gv-textarea.is-error:focus-visible {
+  outline: 2px solid var(--gv-cyan) !important;
+  outline-offset: 2px;
+  border-color: var(--gv-danger) !important;
+  box-shadow: 0 0 14px var(--gv-cyan-glow), 0 0 10px var(--gv-danger-glow) !important;
+}
+
+.gv-btn:focus-visible,
+.gv-action-btn:focus-visible,
+.gv-payment-tab:focus-visible,
+.gv-qty-btn:focus-visible,
+.gv-btn-remove:focus-visible,
+.gv-recent-order-chip:focus-visible {
+  outline: 2px solid var(--gv-cyan) !important;
+  outline-offset: 2px;
+  box-shadow: 0 0 14px var(--gv-cyan-glow);
+}
+
+@media (max-width: 991px) {
+  .gv-builder-summary-card {
+    position: static !important;
+    top: auto !important;
+    margin-top: 1.5rem !important;
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .gv-navbar {
+    gap: 0.65rem;
+  }
+  .gv-brand-icon {
+    width: 34px;
+    height: 34px;
+    font-size: 1.1rem;
+  }
+  .gv-brand-name {
+    font-size: 1.15rem;
+    letter-spacing: 0.06em;
+  }
+  .gv-brand-sub {
+    font-size: 0.6rem;
+  }
+  .gv-nav-actions {
+    gap: 0.45rem;
+  }
+  .gv-action-btn,
+  .gv-hamburger {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.05rem;
+  }
+  .gv-builder-summary-card {
+    padding: 1.15rem 1rem !important;
+  }
+  .gv-card {
+    padding: 1.15rem;
+  }
+  .gv-builder-slot {
+    padding: 1rem !important;
+  }
+  .gv-slot-actions {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+  .gv-rig-specs-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .gv-simulator-panel {
+    padding: 1.15rem 1rem !important;
+  }
+  .gv-res-pills {
+    width: 100% !important;
+  }
+}
+
+/* 375px Mobile Ultra-Compact Polish */
+@media (max-width: 380px) {
+  .gv-builder-hero,
+  .gv-prebuilt-hero,
+  .gv-bench-hero {
+    padding: 1.75rem 0 1.25rem !important;
+  }
+  .gv-slot-thumbnail {
+    width: 54px !important;
+    height: 54px !important;
+  }
+  .gv-slot-product-name {
+    font-size: 0.95rem !important;
+  }
+  .gv-slot-price {
+    font-size: 1rem !important;
+  }
+  .gv-tier-tab {
+    padding: 0.45rem 0.9rem !important;
+    font-size: 0.85rem !important;
+  }
+  .gv-benchmark-card {
+    padding: 1rem !important;
+  }
+  .gv-benchmark-fps-val {
+    font-size: 1.8rem !important;
+  }
+  .gv-btn-lg {
+    padding: 0.75rem 1.4rem !important;
+    font-size: 0.95rem !important;
   }
 }
