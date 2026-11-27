@@ -4,7 +4,7 @@ Group 08 - Gaming Gear and PC Parts E-Commerce Platform | IICT (CL 1000) Semeste
 
 ## Live Links & Documentation
 - **Live Deployed Website:** https://mueeziqlevel2-a11y.github.io/SE-B_Group08_GearVault/
-- **Usability Testing Google Form:** PASTE_YOUR_GOOGLE_FORM_PUBLIC_URL_HERE
+- **Usability Testing Google Form:** https://docs.google.com/forms/d/e/1FAIpQLSdiESk60XEDRbs7EFsTHbxuJzR5LKO7L80TKHZ8_KQxN56YMg/viewform
 - **Prototype & Feedback Report:** [docs/Prototype_and_Feedback_Report.pdf](docs/Prototype_and_Feedback_Report.pdf)
 - **Paper Prototype Photos:** [docs/prototype-photos/](docs/prototype-photos/)
 - **User Feedback Photos:** [docs/feedback-photos/](docs/feedback-photos/)
