@@ -1,6 +1,6 @@
 # GearVault AI Session Transcript — Session 01
 
-- **Branch / Student ID:** `261-3099`
+- **Branch / Student ID:** `26i-3099`
 - **Conversation ID:** `a14e8edf-0ff9-40c7-84ed-12db6aea1f1b`
 - **Date:** `2026-11-26`
 
