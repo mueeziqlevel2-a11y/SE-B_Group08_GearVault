@@ -83,14 +83,14 @@ function renderHomeFlashDeals() {
             </button>
           </div>
 
-          <a href="part-details.html?id=${product.id}" class="gv-product-thumb">
+          <a href="${product.category === 'gear' ? (window.location.pathname.includes('/pages/') ? 'gaming-gear.html' : 'pages/gaming-gear.html') : (window.location.pathname.includes('/pages/') ? '../pc-parts.html' : 'pc-parts.html')}" class="gv-product-thumb">
             <img src="${product.image}" alt="${product.name}" loading="lazy" onerror="handleImgError(this, '${product.name}')">
           </a>
 
           <div class="gv-product-body">
             <div class="gv-product-category">${product.brand} &bull; ${product.subCategory.toUpperCase()}</div>
             <h3 class="gv-product-title">
-              <a href="part-details.html?id=${product.id}">${product.name}</a>
+              <a href="${product.category === 'gear' ? (window.location.pathname.includes('/pages/') ? 'gaming-gear.html' : 'pages/gaming-gear.html') : (window.location.pathname.includes('/pages/') ? '../pc-parts.html' : 'pc-parts.html')}">${product.name}</a>
             </h3>
 
             <div class="gv-rating-wrap">
@@ -149,14 +149,14 @@ function renderFeaturedProducts(category = 'all') {
             </button>
           </div>
 
-          <a href="part-details.html?id=${product.id}" class="gv-product-thumb">
+          <a href="${product.category === 'gear' ? (window.location.pathname.includes('/pages/') ? 'gaming-gear.html' : 'pages/gaming-gear.html') : (window.location.pathname.includes('/pages/') ? '../pc-parts.html' : 'pc-parts.html')}" class="gv-product-thumb">
             <img src="${product.image}" alt="${product.name}" loading="lazy" onerror="handleImgError(this, '${product.name}')">
           </a>
 
           <div class="gv-product-body">
             <div class="gv-product-category">${product.brand} &bull; ${product.subCategory.toUpperCase()}</div>
             <h3 class="gv-product-title">
-              <a href="part-details.html?id=${product.id}">${product.name}</a>
+              <a href="${product.category === 'gear' ? (window.location.pathname.includes('/pages/') ? 'gaming-gear.html' : 'pages/gaming-gear.html') : (window.location.pathname.includes('/pages/') ? '../pc-parts.html' : 'pc-parts.html')}">${product.name}</a>
             </h3>
 
             <div class="gv-rating-wrap">

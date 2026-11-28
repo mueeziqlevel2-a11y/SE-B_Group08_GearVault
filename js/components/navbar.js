@@ -1,4 +1,4 @@
-﻿function renderGameVaultNavbar(activePage = '') {
+function renderGameVaultNavbar(activePage = '') {
   const container = document.getElementById('gv-navbar-container');
   if (!container) return;
 

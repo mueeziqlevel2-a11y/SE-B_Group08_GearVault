@@ -1,4 +1,4 @@
-﻿document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
   if (typeof renderGameVaultNavbar === 'function') renderGameVaultNavbar('pc-parts');
   if (typeof renderGameVaultFooter === 'function') renderGameVaultFooter();
 

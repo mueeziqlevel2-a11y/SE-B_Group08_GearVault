@@ -68,7 +68,7 @@ function normalizeNestedLinks() {
     container.querySelectorAll('a[href]').forEach(link => {
       const href = link.getAttribute('href');
       if (!href || href.startsWith('http') || href.startsWith('#') || href.startsWith('javascript:')) return;
-      if (['cart.html', 'flash-deals.html', 'pc-builder.html', 'prebuilt-pcs.html', 'benchmarks.html', 'checkout.html'].includes(href)) {
+      if (href.endsWith('.html') && href !== 'index.html' && href !== 'pc-parts.html') {
         // Keep sibling link
       } else if (!href.startsWith('../')) {
         link.setAttribute('href', `../${href}`);

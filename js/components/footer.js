@@ -1,4 +1,4 @@
-﻿function renderGameVaultFooter() {
+function renderGameVaultFooter() {
   const container = document.getElementById('gv-footer-container');
   if (!container) return;
 

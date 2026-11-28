@@ -415,7 +415,7 @@ function renderFlashDealsGrid() {
           </div>
 
           <!-- Product Image -->
-          <a href="part-details.html?id=${encodeURIComponent(product.id)}" class="gv-product-thumb">
+          <a href="${product.category === 'gear' ? 'gaming-gear.html' : '../pc-parts.html'}" class="gv-product-thumb">
             <img src="${escapeHtml(product.image)}"
                  alt="${safeAlt}"
                  data-fallback-label="${safeName}"
@@ -427,7 +427,7 @@ function renderFlashDealsGrid() {
           <div class="gv-product-body">
             <div class="gv-product-category">${escapeHtml(product.brand)} &bull; ${escapeHtml(product.subCategory.toUpperCase())}</div>
             <h3 class="gv-product-title">
-              <a href="part-details.html?id=${encodeURIComponent(product.id)}">${safeName}</a>
+              <a href="${product.category === 'gear' ? 'gaming-gear.html' : '../pc-parts.html'}">${safeName}</a>
             </h3>
 
             <div class="gv-rating-wrap">
