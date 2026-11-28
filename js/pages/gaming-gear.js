@@ -424,7 +424,13 @@ const NESTED_SIBLING_PAGES = new Set([
   'checkout.html',
   'order-tracking.html',
   'flash-deals.html',
-  'gaming-gear.html'
+  'gaming-gear.html',
+  'pc-builder.html',
+  'prebuilt-pcs.html',
+  'benchmarks.html',
+  'compare.html',
+  'wishlist.html',
+  'about.html'
 ]);
 
 const filterState = {
